@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/designer_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <!--
+    <TextView
+        android:id="@+id/designer_label"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center"
+        android:layout_alignTop="@id/designer_icon"
+        android:text="人气明星"
+        android:textSize="12dp"
+        android:textColor="#FFFFFF"
+        android:background="#00c8d7" />
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/designer_icon"
+        android:layout_marginTop="13dp"
+        android:text="美国除了自驾还可以怎么玩？"
+        android:textSize="18sp"
+        android:textColor="#00c8d7"/>
+    <TextView
+        android:id="@+id/designer_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/article_title"
+        android:layout_marginTop="10dp"
+        android:text="郑爽爽"
+        android:textSize="14sp"
+        android:textColor="#333333"/>
+    <TextView
+        android:id="@+id/designer_identity"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_below="@id/article_title"
+        android:layout_toRightOf="@id/designer_name"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="15dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:gravity="center_vertical"
+        android:text="指南猫旅行 后勤部总经理"
+        android:textSize="13sp"
+        android:textColor="#7ad1d5" />
+    <TextView
+        android:id="@+id/article_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/designer_name"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:lineSpacingMultiplier="1.1"
+        android:text="如果你不愿意自家，welcome to shanghai，美国还有更好的选择,深入美国人的段家去感受真正的美国文化，也许你对美国的认识会不一样。深入美国人的段家去感受真正的美国文化，也许你对美国的认识会不一样。"
+        android:typeface="sans"
+        android:textSize="14dp"
+        android:textColor="#666666"/>
+        -->
+</RelativeLayout>

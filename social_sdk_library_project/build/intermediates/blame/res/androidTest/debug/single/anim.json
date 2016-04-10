@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_shareboard_animation_out.xml",
+        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_shareboard_animation_out.xml"
+    },
+    {
+        "merged": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_shareboard_animation_in.xml",
+        "source": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_shareboard_animation_in.xml"
+    },
+    {
+        "merged": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_fade_out.xml",
+        "source": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_fade_out.xml"
+    },
+    {
+        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_shareboard_animation_in.xml",
+        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_shareboard_animation_in.xml"
+    },
+    {
+        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_slide_in_from_bottom.xml",
+        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_slide_out_from_bottom.xml",
+        "source": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_slide_out_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_slide_in_from_bottom.xml",
+        "source": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_slide_in_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_slide_out_from_bottom.xml",
+        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_slide_out_from_bottom.xml"
+    },
+    {
+        "merged": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_fade_in.xml",
+        "source": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_fade_in.xml"
+    },
+    {
+        "merged": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_shareboard_animation_out.xml",
+        "source": "E:\\CommonProject-master\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_shareboard_animation_out.xml"
+    },
+    {
+        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_fade_in.xml",
+        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_fade_in.xml"
+    },
+    {
+        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\umeng_socialize_fade_out.xml",
+        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\social_sdk_library_project\\build\\intermediates\\bundles\\debug\\res\\anim\\umeng_socialize_fade_out.xml"
+    }
+]

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:id="@+id/contact_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#e0e0e0"
+        android:dividerHeight="1px"
+        android:scrollbars="none" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/contact_list"
+        android:background="#e0e0e0"/>
+    <TextView
+        android:id="@+id/tips_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="当前没有会话消息哦"
+        android:textSize="14sp"
+        android:textColor="#999999"
+        android:visibility="gone"/>
+</RelativeLayout>

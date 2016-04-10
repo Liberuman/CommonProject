@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:background="#FFFFFF">
+    <TextView
+        android:id="@+id/activity_title_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="明天去华夏公园打球明天去华夏公园打球明天去华夏公园打球明天去华夏公园打球"
+        android:textSize="15dp"
+        android:textColor="#333333"/>
+    <TextView
+        android:id="@+id/post_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="10dp"
+        android:text="2016-04-10"
+        android:textSize="13dp"
+        android:textColor="#666666"/>
+</LinearLayout>

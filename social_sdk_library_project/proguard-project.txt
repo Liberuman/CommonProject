@@ -1,0 +1,180 @@
+# To enable ProGuard in your project, edit project.properties
+# to define the proguard.config property as described in that file.
+#
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+
+-optimizationpasses 5                                       # 指定代码的压缩级别
+-dontusemixedcaseclassnames                                 # 是否使用大小写混合
+-dontskipnonpubliclibraryclasses                            # 是否混淆第三方jar
+-dontpreverify                                              # 混淆时是否做预校验
+-verbose                                                    # 混淆时是否记录日志
+
+#============================================================================
+#   keep umeng share sdk and ignore its wraning
+#============================================================================
+-dontshrink
+-dontoptimize
+
+-dontwarn android.webkit.WebView
+-dontwarn com.umeng.**
+-dontwarn com.sina.**
+-dontwarn com.tencent.**
+
+-keepattributes *Annotation*
+-keepattributes SourceFile,LineNumberTable
+
+-keep public interface com.tencent.**
+-keep public interface com.umeng.socialize.**
+-keep public interface com.umeng.socialize.sensor.**
+-keep public interface com.umeng.scrshot.**
+-keep public class com.umeng.socialize.* {*;}
+-keep public class javax.**
+-keep public class android.webkit.**
+-keep class com.umeng.scrshot.**
+-keep public class com.tencent.** {*;}
+-keep class com.umeng.socialize.sensor.**
+-keep class com.umeng.socialize.handler.**
+-keep class com.umeng.socialize.handler.*
+-keep class com.tencent.mm.sdk.modelmsg.WXMediaMessage {*;}
+-keep class com.tencent.mm.sdk.modelmsg.** implements com.tencent.mm.sdk.modelmsg.WXMediaMessage$IMediaObject {*;}
+-keep class com.tencent.open.TDialog$*
+-keep class com.tencent.open.TDialog$* {*;}
+-keep class com.tencent.open.PKDialog
+-keep class com.tencent.open.PKDialog {*;}
+-keep class com.tencent.open.PKDialog$*
+-keep class com.tencent.open.PKDialog$* {*;}
+-keep class com.sina.** {*;}
+-keep class com.tencent.** {*;}
+-keep public class com.umeng.soexample.R$*{
+    public static final int *;
+}
+-keep public class com.umeng.soexample.R$*{
+    public static final int *;
+}
+
+#============================================================================
+#   keep all component that provided by Android
+#============================================================================
+-keep public class * extends android.app.Fragment
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.preference.Preference
+-keep public class * extends android.support.v4.**
+
+#============================================================================
+#   keep all classes that used EventBus compentant
+#============================================================================
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
+
+#============================================================================
+#   keep all classes that implements Serializable
+#============================================================================
+-keep public class * implements java.io.Serializable {*;}
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+#============================================================================
+#   keep all classes that implements Parcelable
+#============================================================================
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+#============================================================================
+#   keep Gson and ignore its wraning
+#============================================================================
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class sun.misc.Unsafe { *; }
+-keep class com.zhinanmao.znm.bean.** { *; }
+-keep class com.zhinanmao.persisconn.PersisConnModel
+-keep class com.zhinanmao.designer_app.designer_BaseClass.** { *; }
+-keep class com.zhinanmao.designer_app.designer_bean.** { *; }
+
+#============================================================================
+#   keep umeng and ignore its wraning
+#============================================================================
+-dontwarn com.umeng.**
+-dontwarn org.apache.commons.net.**
+-keep class com.umeng.** { *; }
+-keep class com.umeng.analytics.** { *; }
+-keep class com.umeng.common.** { *; }
+-keep class com.umeng.newxp.** { *; }
+-keep public interface com.umeng.socialize.**
+-keep public interface com.umeng.socialize.sensor.**
+-keep public interface com.umeng.scrshot.**
+-keep public class com.umeng.socialize.* {*;}
+-keep class com.umeng.socialize.sensor.**
+
+#============================================================================
+#   keep pulltorefresh library and ignore its warning
+#============================================================================
+-dontwarn com.handmark.pulltorefresh.library.**
+-dontwarn com.handmark.pulltorefresh.library.extras.**
+-dontwarn com.handmark.pulltorefresh.library.internal.**
+-keep class com.handmark.pulltorefresh.library.** { *;}
+-keep class com.handmark.pulltorefresh.library.extras.** { *;}
+-keep class com.handmark.pulltorefresh.library.internal.** { *;}
+
+#============================================================================
+#   keep all classes that contain reflection calls
+#============================================================================
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+#============================================================================
+#   keep all classes that are custom component
+#============================================================================
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context);
+}
+
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembernames class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keepattributes Exceptions,InnerClasses,Signature
+-keep public class javax.**
+-keep public class android.webkit.**
+-keep public class [your_pkg].R$*{
+    public static final int *;
+}
+
+

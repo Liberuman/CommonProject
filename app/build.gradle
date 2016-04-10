@@ -1,0 +1,107 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
+
+    defaultConfig {
+        applicationId "com.sxu.commonproject"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "0.1"
+    }
+
+    productFlavors {
+        a1001 { manifestPlaceholders = [CHANNEL_NAME: "app360", CHANNEL_NO: "1001"] }
+        a1002 { manifestPlaceholders = [CHANNEL_NAME: "baidu", CHANNEL_NO: "1002"] }
+        a1003 { manifestPlaceholders = [CHANNEL_NAME: "yingyongbao", CHANNEL_NO: "1003"] }
+        a1004 { manifestPlaceholders = [CHANNEL_NAME: "wandoujia", CHANNEL_NO: "1004"] }
+        a1005 { manifestPlaceholders = [CHANNEL_NAME: "ppzhushou", CHANNEL_NO: "1005"] }
+        a1006 { manifestPlaceholders = [CHANNEL_NAME: "xiaomi", CHANNEL_NO: "1006"] }
+        a1007 { manifestPlaceholders = [CHANNEL_NAME: "oppo", CHANNEL_NO: "1007"] }
+        a1008 { manifestPlaceholders = [CHANNEL_NAME: "anzhuo", CHANNEL_NO: "1008"] }
+        a1009 { manifestPlaceholders = [CHANNEL_NAME: "anzhi", CHANNEL_NO: "1009"] }
+        a1010 { manifestPlaceholders = [CHANNEL_NAME: "meizu", CHANNEL_NO: "1010"] }
+        a1011 { manifestPlaceholders = [CHANNEL_NAME: "app91", CHANNEL_NO: "1011"] }
+        a1012 { manifestPlaceholders = [CHANNEL_NAME: "huawei", CHANNEL_NO: "1012"] }
+        a1013 { manifestPlaceholders = [CHANNEL_NAME: "le", CHANNEL_NO: "1013"] }
+        a1014 { manifestPlaceholders = [CHANNEL_NAME: "yingyonghui", CHANNEL_NO: "1014"] }
+        a1015 { manifestPlaceholders = [CHANNEL_NAME: "jifeng", CHANNEL_NO: "1015"] }
+        a1016 { manifestPlaceholders = [CHANNEL_NAME: "mumayi", CHANNEL_NO: "1016"] }
+        a1017 { manifestPlaceholders = [CHANNEL_NAME: "chinamobile", CHANNEL_NO: "1017"] }
+        a1018 { manifestPlaceholders = [CHANNEL_NAME: "chinaunicom", CHANNEL_NO: "1018"] }
+        a1019 { manifestPlaceholders = [CHANNEL_NAME: "chinatelecom", CHANNEL_NO: "1019"] }
+        a1020 { manifestPlaceholders = [CHANNEL_NAME: "channel1020", CHANNEL_NO: "1020"] }
+        a1021 { manifestPlaceholders = [CHANNEL_NAME: "guangdiantong", CHANNEL_NO: "1021"] }
+        a1000 { manifestPlaceholders = [CHANNEL_NAME: "officialweb", CHANNEL_NO: "1000"] }
+    }
+
+    buildTypes {
+        debug {
+            // 是否进行混淆
+            minifyEnabled true
+            // 混淆使用的文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            // 移除无用的resource文件
+            shrinkResources true
+            // 显示log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+        }
+
+        release {
+            // 是否进行混淆
+            minifyEnabled true
+            // 混淆使用的文件
+            //proguardFiles 'proguard-project.txt'
+            // 移除无用的resource文件
+            shrinkResources true
+            // 显示log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+        }
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs = ['assets']
+        }
+    }
+
+    //为了解决部分第三方库重复打包了META-INF的问题
+    packagingOptions{
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+repositories{
+    flatDir{
+        dirs 'libs' //aar的目录地址
+    }
+}
+// 依赖的工具包
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.+'
+    compile project(':pulltorefresh')
+    compile project(':social_sdk_library_project')
+    compile 'com.android.support:support-v4:23.+'
+    //avoscloud-sdk 为 LeanCloud基础包
+    compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
+    //avoscloud-push 为推送与实时聊天需要的包
+    compile('cn.leancloud.android:avoscloud-push:v3.+@aar') { transitive = true }
+    //avoscloud-statistics 为 LeanCloud 统计包
+    compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
+    //avoscloud-feedback 为 LeanCloud 用户反馈包
+    //compile ('cn.leancloud.android:avoscloud-feedback:v3.+@aar')
+    //avoscloud-sns 为 LeanCloud 第三方登录包
+    //compile ('cn.leancloud.android:avoscloud-sns:v3.+@aar')
+    //compile ('cn.leancloud.android:qq-sdk:1.6.1-leancloud')
+    //avoscloud-search 为 LeanCloud 应用内搜索包
+    //compile ('cn.leancloud.android:avoscloud-search:v3.+@aar')
+}

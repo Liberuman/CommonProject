@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:background="#FFFFFF">
+    <TextView
+        android:id="@+id/nearby_text"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginRight="25dp"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:text="附近的小伙伴"
+        android:textSize="15sp"
+        android:textColor="#666666"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-20dp"
+        android:src="@drawable/right_arrow"/>
+</LinearLayout>

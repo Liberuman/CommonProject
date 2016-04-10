@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:gravity="center_vertical"
+    android:background="#FFFFFF">
+    <ImageView
+        android:id="@+id/activity_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/test_icon"/>
+    <TextView
+        android:id="@+id/activity_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_below="@id/activity_icon"
+        android:layout_marginRight="80dp"
+        android:text="周六下午去华夏公园打篮球周六下午去华夏公园打篮球周六下午去华夏公园打篮球"
+        android:textSize="15sp"
+        android:textColor="#333333"
+        android:maxLines="2" />
+    <TextView
+        android:id="@+id/distance_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="12dp"
+        android:layout_below="@id/activity_icon"
+        android:layout_alignParentRight="true"
+        android:text="1千米"
+        android:textSize="13sp"
+        android:textColor="#666666"
+        android:maxLines="2" />
+    <TextView
+        android:id="@+id/poster_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_below="@id/activity_title_text"
+        android:text="Freeman"
+        android:textSize="13sp"
+        android:textColor="#666666"
+        android:maxLines="2" />
+    <TextView
+        android:id="@+id/post_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="12dp"
+        android:layout_below="@id/activity_title_text"
+        android:layout_alignParentRight="true"
+        android:text="2016-02-21"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:maxLines="2" />
+</RelativeLayout>
