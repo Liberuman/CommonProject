@@ -85,6 +85,7 @@ public class LaunchedActivitiesActivity extends BaseProgressActivity {
     public void initActivity() {
         activityList.setMode(PullToRefreshBase.Mode.BOTH);
         activityList.setShowIndicator(false);
+        navigationBar.setTitle("已发布的活动");
         setCommonAdapter();
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
@@ -113,7 +114,9 @@ public class LaunchedActivitiesActivity extends BaseProgressActivity {
                     @Override
                     public void onFinish(ActivityBean bean) {
                         LogUtil.i("data====" + bean.data);
-                        activityList.onRefreshComplete();
+                        if (activityList != null) {
+                            activityList.onRefreshComplete();
+                        }
                         if (bean.data != null && bean.data.size() > 0) {
                             if (currentPage == 1) {
                                 notifyLoadFinish(MSG_LOAD_FINISH);
@@ -147,8 +150,6 @@ public class LaunchedActivitiesActivity extends BaseProgressActivity {
                             notifyLoadFinish(MSG_LOAD_NO_MORE);
                         }
                     }
-
-
                 });
 
         activityQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.LATEST_ACTIVITIES, currentPage)));

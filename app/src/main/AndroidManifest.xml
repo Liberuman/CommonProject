@@ -37,10 +37,14 @@
             android:name="UMENG_APPKEY"
             android:value="56d41da567e58eb48f001040" >
         </meta-data>
-        <!-- 高德定位Appkay-->
+        <!-- 高德定位DebugAppkay-->
         <meta-data android:name="com.amap.api.v2.apikey"
-            android:value="7d9e87437635c5c16d3fe94c741d588a">
+            android:value="d169128117ea01d013426590e394be41">
         </meta-data>
+        <!-- 高德定位ReleaseAppkay-->
+        <!--<meta-data android:name="com.amap.api.v2.apikey"-->
+            <!--android:value="04770bc4c9f2d6e113382dcf4c8c78a8">-->
+        <!--</meta-data>-->
         <!-- 多渠道打包 -->
         <meta-data
             android:name="UMENG_CHANNEL"

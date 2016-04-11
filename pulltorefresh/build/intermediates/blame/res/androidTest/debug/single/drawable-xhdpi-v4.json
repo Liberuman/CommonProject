@@ -1,18 +1,26 @@
 [
     {
-        "merged": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
-        "source": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/default_ptr_rotate.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/default_ptr_rotate.png"
     },
     {
-        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
-        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/res/merged/androidTest/debug/drawable-xhdpi-v4/indicator_arrow.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/bundles/debug/res/drawable-xhdpi-v4/indicator_arrow.png"
     },
     {
-        "merged": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
-        "source": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
     },
     {
-        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
-        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\default_ptr_rotate.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\default_ptr_rotate.png"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\indicator_arrow.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\indicator_arrow.png"
     }
 ]

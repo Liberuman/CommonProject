@@ -19,6 +19,7 @@ import com.sxu.commonproject.app.CommonApplication;
 import com.sxu.commonproject.baseclass.BaseCommonAdapter;
 import com.sxu.commonproject.bean.BaseBean;
 import com.sxu.commonproject.util.AndroidPlatformUtil;
+import com.sxu.commonproject.util.ToastUtil;
 import com.sxu.commonproject.view.NavigationBar;
 
 /**
@@ -173,6 +174,7 @@ public abstract class BaseProgressActivity<T extends BaseBean> extends Activity 
             case MSG_LOAD_MORE_FINISH:
                 break;
             case MSG_LOAD_NO_MORE:
+                ToastUtil.show(this, "没有更多数据啦~");
                 break;
             case MSG_NO_LOGIN:
                 // 启动登录窗口

@@ -13,11 +13,18 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="82dp"
+            android:layout_height="82dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/icon_bg">
         <com.sxu.commonproject.view.CircleImageView
             android:id="@+id/icon"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="25dp" />
+            android:layout_gravity="center"
+            android:src="@drawable/default_icon"/>
+        </FrameLayout>
         <TextView
             android:id="@+id/nickname_text"
             android:layout_width="wrap_content"
@@ -135,7 +142,7 @@
             android:layout_marginLeft="10dp"
             android:paddingTop="18dp"
             android:paddingBottom="18dp"
-            android:text="上善若水a到减肥了阿三闾大夫就撒地方"
+            android:text="上善若水"
             android:textSize="14sp"
             android:textColor="#666666"
             android:background="#00000000"/>

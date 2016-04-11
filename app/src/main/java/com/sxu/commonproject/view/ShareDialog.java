@@ -94,10 +94,10 @@ public class ShareDialog extends AlertDialog {
     }
 
     private void initData() {
-        shareTypeList.add(new ShareBean(R.drawable.weixin_icon, "微信"));
-        shareTypeList.add(new ShareBean(R.drawable.wechat_moment_icon, "朋友圈"));
-        shareTypeList.add(new ShareBean(R.drawable.login_qq_icon, "QQ"));
-        shareTypeList.add(new ShareBean(R.drawable.sina_weibo_icon, "微博"));
+        shareTypeList.add(new ShareBean(R.drawable.share_wechat_icon, "微信"));
+        shareTypeList.add(new ShareBean(R.drawable.share_wechat_moment_icon, "朋友圈"));
+        shareTypeList.add(new ShareBean(R.drawable.share_qq_icon, "QQ"));
+        shareTypeList.add(new ShareBean(R.drawable.share_sina_icon, "微博"));
     }
 
     private UMShareListener umShareListener = new UMShareListener() {

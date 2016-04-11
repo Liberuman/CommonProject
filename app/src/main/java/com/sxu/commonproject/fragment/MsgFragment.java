@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.activity.ConversationActivity;
+import com.sxu.commonproject.activity.LoginActivity;
 import com.sxu.commonproject.activity.NearByContactActivity;
 import com.sxu.commonproject.app.CommonApplication;
 import com.sxu.commonproject.baseclass.BaseCommonAdapter;

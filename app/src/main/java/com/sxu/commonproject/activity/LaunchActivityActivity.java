@@ -1,6 +1,7 @@
 package com.sxu.commonproject.activity;
 
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -13,12 +14,17 @@ import android.widget.TextView;
 
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.app.CommonApplication;
+import com.sxu.commonproject.baseclass.ACache;
+import com.sxu.commonproject.baseclass.BaseCommonAdapter;
+import com.sxu.commonproject.baseclass.BaseViewHolder;
+import com.sxu.commonproject.bean.ActivityTypeBean;
 import com.sxu.commonproject.manager.UserManager;
 import com.sxu.commonproject.bean.BaseProtocolBean;
 import com.sxu.commonproject.bean.EventBusBean;
 import com.sxu.commonproject.http.BaseHttpQuery;
 import com.sxu.commonproject.protocol.ServerConfig;
 import com.sxu.commonproject.util.AndroidPlatformUtil;
+import com.sxu.commonproject.util.LogUtil;
 import com.sxu.commonproject.util.ToastUtil;
 import com.sxu.commonproject.view.NavigationBar;
 
@@ -45,9 +51,9 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
     private PopupWindow popupWindow;
 
     private boolean isShowing = false;
-    private int typeId = 0;
+    private String typeId;
     private BaseHttpQuery<BaseProtocolBean> launchQuest;
-    private List<String> data = new ArrayList<String>();
+    private ArrayList<ActivityTypeBean.ActivityTypeItemBean> activityTypeList;
 
     @Override
     protected int getLayoutResId() {
@@ -76,14 +82,8 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
     @Override
     protected void initActivity() {
         navigationBar.showReturnIcon().setTitle("发布活动");
-
-        data.add("篮球");
-        data.add("网球");
-        data.add("羽毛球");
-        data.add("乒乓球");
-        data.add("足球");
-        data.add("桌球");
-        data.add("爬山");
+        activityTypeList = (ArrayList<ActivityTypeBean.ActivityTypeItemBean>)
+                ACache.get(CommonApplication.getInstance()).getAsObject("activityType");
 
         launchText.setOnClickListener(this);
         typeText.setOnClickListener(this);
@@ -123,8 +123,43 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
         params.put("type", typeId+"");
         params.put("status", "1");
         params.put("time", timeEdit.getText().toString());
-        params.put("comment", commentEdit.getText().toString());
-        launchQuest.doPostQuery(ServerConfig.urlWithSuffix(ServerConfig.ADD_ACTIVITY), params);
+        if (!TextUtils.isEmpty(CommonApplication.userInfo.icon)) {
+            params.put("user_icon", CommonApplication.userInfo.icon);
+        } else {
+            params.put("user_icon", "");
+        }
+        if (!TextUtils.isEmpty(commentEdit.getText().toString())) {
+            params.put("comment", commentEdit.getText().toString());
+        } else {
+            params.put("comment", "");
+        }
+        LogUtil.i("param===" + params.toString());
+        if (CommonApplication.isLogined) {
+            if (isValidActivityInfo()) {
+                launchQuest.doPostQuery(ServerConfig.urlWithSuffix(ServerConfig.ADD_ACTIVITY), params);
+            }
+        } else {
+            ToastUtil.show(this, "请登录后再发布活动");
+        }
+    }
+
+    private boolean isValidActivityInfo() {
+        if (TextUtils.isEmpty(activityTitleEdit.getText().toString())) {
+            ToastUtil.show(this, "活动标题不能为空");
+            return false;
+        } else if (TextUtils.isEmpty(activityTitleEdit.getText().toString())) {
+            ToastUtil.show(this, "目的地不能为空");
+            return false;
+        } else if (TextUtils.isEmpty(activityTitleEdit.getText().toString())) {
+            ToastUtil.show(this, "活动时间不能为空");
+            return false;
+        } else {
+            /**
+             * Nothing
+             */
+        }
+
+        return true;
     }
 
     @Override
@@ -145,26 +180,34 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
         InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(typeText.getWindowToken(), 0);
         ListView typeList = new ListView(this);
-        typeList.setBackgroundColor(Color.parseColor("#e0e0e0"));
+        typeList.setBackgroundResource(R.drawable.activity_info_edit_bg);
         typeList.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.view_choose_activity_type, data);
-        typeList.setAdapter(adapter);
-        popupWindow = new MyPopupWindow(typeList, AndroidPlatformUtil.getScreenWidth(this)
-                - AndroidPlatformUtil.dpToPx(this, 30), AndroidPlatformUtil.dpToPx(this, 180));
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.activity_info_edit_bg));
-        popupWindow.showAsDropDown(typeText, 0, 0);
-        openIcon.setImageResource(R.drawable.arrow_up_icon);
+        if (activityTypeList != null && activityTypeList.size() > 0) {
+            typeList.setAdapter(new BaseCommonAdapter<ActivityTypeBean.ActivityTypeItemBean>(LaunchActivityActivity.this, activityTypeList,
+                    R.layout.item_activity_type_layout) {
+                @Override
+                public void convert(BaseViewHolder viewHolder, ActivityTypeBean.ActivityTypeItemBean data) {
+                    viewHolder.setText(R.id.type_name_text, data.type_name);
+                }
+            });
 
-        typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                typeId = position;
-                typeText.setText(data.get(position));
-                popupWindow.dismiss();
-            }
-        });
+            popupWindow = new MyPopupWindow(typeList, AndroidPlatformUtil.getScreenWidth(this)
+                    - AndroidPlatformUtil.dpToPx(this, 30), AndroidPlatformUtil.dpToPx(this, 180));
+            popupWindow.setFocusable(true);
+            popupWindow.setOutsideTouchable(true);
+            popupWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.activity_info_edit_bg));
+            popupWindow.showAsDropDown(typeText, 0, 0);
+            openIcon.setImageResource(R.drawable.arrow_up_icon);
+
+            typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    typeId = activityTypeList.get(position).id;
+                    typeText.setText(activityTypeList.get(position).type_name);
+                    popupWindow.dismiss();
+                }
+            });
+        }
     }
 
     public class MyPopupWindow extends PopupWindow {

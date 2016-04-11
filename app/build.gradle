@@ -53,7 +53,7 @@ android {
             // 是否进行混淆
             minifyEnabled true
             // 混淆使用的文件
-            //proguardFiles 'proguard-project.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // 移除无用的resource文件
             shrinkResources true
             // 显示log

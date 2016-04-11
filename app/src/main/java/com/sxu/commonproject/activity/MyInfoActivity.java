@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -172,6 +173,8 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
                         handler.sendEmptyMessage(3);
                     }
                 });
+            } else {
+                setBlurImageView(((BitmapDrawable)getResources().getDrawable(R.drawable.default_icon)).getBitmap(), 4);
             }
         }
 

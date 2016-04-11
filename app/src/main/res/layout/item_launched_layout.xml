@@ -19,6 +19,6 @@
         android:layout_gravity="bottom"
         android:layout_marginLeft="10dp"
         android:text="2016-04-10"
-        android:textSize="13dp"
+        android:textSize="12dp"
         android:textColor="#666666"/>
 </LinearLayout>

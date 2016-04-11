@@ -1,18 +1,26 @@
 [
     {
-        "merged": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
-        "source": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
     {
-        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
-        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/res/merged/androidTest/debug/layout/pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_horizontal.xml"
     },
     {
-        "merged": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
-        "source": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
     },
     {
-        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_horizontal.xml",
-        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_horizontal.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/res/merged/androidTest/debug/layout/pull_to_refresh_header_vertical.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/bundles/debug/res/layout/pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\pull_to_refresh_header_vertical.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\layout\\pull_to_refresh_header_vertical.xml"
     }
 ]

@@ -1,34 +1,50 @@
 [
     {
-        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
-        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_out_to_bottom.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_bottom.xml"
     },
     {
-        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
-        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
     },
     {
-        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
-        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
     },
     {
-        "merged": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
-        "source": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
     },
     {
-        "merged": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
-        "source": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_out_to_top.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_out_to_top.xml"
     },
     {
-        "merged": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
-        "source": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_in_from_bottom.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_in_from_bottom.xml"
     },
     {
-        "merged": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
-        "source": "E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_bottom.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_bottom.xml"
     },
     {
-        "merged": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
-        "source": "E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\Users\\juhg\\Downloads\\CommonProject\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/res/merged/androidTest/debug/anim/slide_in_from_top.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/pulltorefresh/build/intermediates/bundles/debug/res/anim/slide_in_from_top.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_top.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_top.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_out_to_bottom.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_out_to_bottom.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\slide_in_from_top.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/E:\\CommonProject-master\\pulltorefresh\\build\\intermediates\\bundles\\debug\\res\\anim\\slide_in_from_top.xml"
     }
 ]

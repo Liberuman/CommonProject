@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
         if (currentPage != 0) {
-            viewPager.setCurrentItem(0);
+            viewPager.setCurrentItem(0, false);
         } else {
             if (exitTime != 0 && System.currentTimeMillis() - exitTime < 2000) {
                 super.onBackPressed();

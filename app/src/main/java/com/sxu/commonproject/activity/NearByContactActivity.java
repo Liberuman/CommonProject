@@ -98,7 +98,9 @@ public class NearByContactActivity extends BaseProgressActivity {
                 if (!TextUtils.isEmpty(data.distance)) {
                     viewHolder.setText(R.id.distance_text, FormatUtil.getFormatDistance(Float.parseFloat(data.distance)));
                 }
-                viewHolder.setImageResource(R.id.user_icon, R.drawable.test3, null, data.icon);
+                if (!TextUtils.isEmpty(data.icon)) {
+                    viewHolder.setImageResource(R.id.user_icon, R.drawable.default_icon, null, data.icon);
+                }
             }
         };
 

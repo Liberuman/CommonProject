@@ -35,7 +35,7 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     protected void initActivity() {
-        appNameText.setText(R.string.app_name + "v" + AndroidPlatformUtil.getVersion(this));
+        appNameText.setText(getResources().getText(R.string.app_name) + " v" + AndroidPlatformUtil.getVersion(this));
         navigationBar.showReturnIcon().setTitle("关于");
     }
 }

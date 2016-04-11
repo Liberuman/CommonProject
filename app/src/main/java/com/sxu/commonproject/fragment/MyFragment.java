@@ -27,6 +27,7 @@ import com.sxu.commonproject.app.CommonApplication;
 import com.sxu.commonproject.manager.UserManager;
 import com.sxu.commonproject.bean.EventBusBean;
 import com.sxu.commonproject.util.LogUtil;
+import com.sxu.commonproject.util.ToastUtil;
 import com.sxu.commonproject.view.ShareDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -81,6 +82,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
             nicknameText.setText(CommonApplication.userInfo.nick_name);
             if (!TextUtils.isEmpty(CommonApplication.userInfo.icon)) {
                 Glide.with(getActivity()).load(CommonApplication.userInfo.icon).into(loginIcon);
+            } else {
+                loginIcon.setImageResource(R.drawable.default_icon);
             }
         }
 
@@ -109,10 +112,20 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.launch_activity_layout:
-                startActivity(new Intent(getActivity(), LaunchActivityActivity.class));
+                if (!CommonApplication.isLogined) {
+                    ToastUtil.show(getActivity(), "请先登录");
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                } else {
+                    startActivity(new Intent(getActivity(), LaunchActivityActivity.class));
+                }
                 break;
             case R.id.launched_activity_layout:
-                startActivity(new Intent(getActivity(), LaunchedActivitiesActivity.class));
+                if (!CommonApplication.isLogined) {
+                    ToastUtil.show(getActivity(), "请先登录");
+                    startActivity(new Intent(getActivity(), LoginActivity.class));
+                } else {
+                    startActivity(new Intent(getActivity(), LaunchedActivitiesActivity.class));
+                }
                 break;
             case R.id.suggestion_layout:
                 startActivity(new Intent(getActivity(), SubmitSuggestionActivity.class));

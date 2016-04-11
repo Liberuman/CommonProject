@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\CommonProject-master\social_sdk_library_project\assets"/></dataSet><dataSet config="debug"><source path="E:\CommonProject-master\social_sdk_library_project\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/assets"/></dataSet><dataSet config="debug"><source path="/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/src/debug/assets"/></dataSet></merger>

@@ -1,6 +1,8 @@
 package com.sxu.commonproject.activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -20,6 +22,8 @@ import com.sxu.commonproject.bean.UserBean;
 import com.sxu.commonproject.http.BaseHttpQuery;
 import com.sxu.commonproject.protocol.ServerConfig;
 import com.sxu.commonproject.util.FastBlurUtil;
+import com.sxu.commonproject.util.LogUtil;
+import com.sxu.commonproject.util.ToastUtil;
 
 /**
  * Created by juhg on 16/3/11.
@@ -121,13 +125,20 @@ public class UserDetailInfoActivity extends BaseProgressActivity {
                         handler.sendEmptyMessage(1);
                     }
                 });
+            } else {
+                setBlurImageView(((BitmapDrawable)getResources().getDrawable(R.drawable.default_icon)).getBitmap(), 4);
             }
         }
 
         sendMsgText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConversationActivity.enter(UserDetailInfoActivity.this, userInfo.id, userInfo.nick_name, true);
+                if (CommonApplication.isLogined) {
+                    ConversationActivity.enter(UserDetailInfoActivity.this, userInfo.id, userInfo.nick_name, true);
+                } else {
+                    ToastUtil.show(UserDetailInfoActivity.this, "请先登录");
+                    startActivity(new Intent(UserDetailInfoActivity.this, LoginActivity.class));
+                }
             }
         });
     }
@@ -151,7 +162,7 @@ public class UserDetailInfoActivity extends BaseProgressActivity {
                         notifyLoadFinish(MSG_LOAD_FAILURE);
                     }
                 });
-
+        LogUtil.i("请求数据" + getIntent().getStringExtra("userId"));
         userInfoQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.GET_USER_INFO, getIntent().getStringExtra("userId"))));
     }
 

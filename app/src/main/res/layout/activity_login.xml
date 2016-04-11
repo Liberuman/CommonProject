@@ -163,16 +163,16 @@
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_weight="1"
-            android:src="@drawable/login_qq_icon"/>
+            android:src="@drawable/share_qq_icon"/>
         <ImageView
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_weight="1"
-            android:src="@drawable/login_weixin_icon"/>
+            android:src="@drawable/share_wechat_icon"/>
         <ImageView
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_weight="1"
-            android:src="@drawable/login_weibo_icon"/>
+            android:src="@drawable/share_sina_icon"/>
     </LinearLayout>
 </LinearLayout>

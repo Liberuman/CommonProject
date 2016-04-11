@@ -5,12 +5,13 @@
     android:paddingLeft="10dp"
     android:paddingRight="15dp"
     android:paddingTop="8dp"
-    android:paddingBottom="8dp">
+    android:paddingBottom="8dp"
+    android:background="#FFFFFF">
     <com.sxu.commonproject.view.CircleImageView
         android:id="@+id/user_icon"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:src="@drawable/test3"/>
+        android:src="@drawable/default_icon"/>
     <TextView
         android:id="@+id/nickname_text"
         android:layout_width="wrap_content"

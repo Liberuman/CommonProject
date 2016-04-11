@@ -7,6 +7,8 @@ import android.widget.GridView;
 
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.activity.SpecificActivityActivity;
+import com.sxu.commonproject.app.CommonApplication;
+import com.sxu.commonproject.baseclass.ACache;
 import com.sxu.commonproject.baseclass.BaseCommonAdapter;
 import com.sxu.commonproject.baseclass.BaseViewHolder;
 import com.sxu.commonproject.bean.ActivityTypeBean;
@@ -82,7 +84,10 @@ public class FindFragment extends BaseProgressFragment {
                 new BaseHttpQuery.OnQueryFinishListener<ActivityTypeBean>() {
                     @Override
                     public void onFinish(ActivityTypeBean bean) {
-                        if (bean.code == 1 && bean.data != null) {
+                        if (bean.code == 1 && bean.data != null && bean.data.size() > 0) {
+                            // 缓存活动类型信息
+                            ACache cache = ACache.get(CommonApplication.getInstance());
+                            cache.put("activityType", bean.data);
                             notifyLoadFinish(MSG_LOAD_FIRST_FINISH);
                             itemData = bean.data;
                         } else {
