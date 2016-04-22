@@ -88,7 +88,7 @@ public class FindFragment extends BaseProgressFragment {
                             // 缓存活动类型信息
                             ACache cache = ACache.get(CommonApplication.getInstance());
                             cache.put("activityType", bean.data);
-                            notifyLoadFinish(MSG_LOAD_FIRST_FINISH);
+                            notifyLoadFinish(MSG_LOAD_FINISH);
                             itemData = bean.data;
                         } else {
                             notifyLoadFinish(MSG_LOAD_EMPTY);

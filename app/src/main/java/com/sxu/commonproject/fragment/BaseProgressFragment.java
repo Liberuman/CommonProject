@@ -44,7 +44,7 @@ public abstract class BaseProgressFragment<T extends BaseBean> extends Fragment 
     /**
      * 数据请求成功
      */
-    protected final int MSG_LOAD_FIRST_FINISH = -2;
+    protected final int MSG_LOAD_FINISH = -2;
     /**
      * 数据请求成功
      */
@@ -131,7 +131,7 @@ public abstract class BaseProgressFragment<T extends BaseBean> extends Fragment 
                 //resultIcon.setImageResource(R.drawable.ic_launcher);
                 //resultText.setText("没有搜索到结果");
                 break;
-            case MSG_LOAD_FIRST_FINISH:
+            case MSG_LOAD_FINISH:
                 isFirstLoad = false;
                 resultLayout.setVisibility(View.GONE);
                 if (rootView != null) {

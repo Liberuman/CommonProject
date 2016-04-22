@@ -1,5 +1,6 @@
 package com.sxu.commonproject.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
@@ -66,11 +67,8 @@ public class ActivityDetailActivity extends BaseProgressActivity {
                 @Override
                 public void onClick(View v) {
                     if (CommonApplication.isLogined) {
-                        Intent intent = new Intent(ActivityDetailActivity.this, ConversationActivity.class);
-                        intent.putExtra("isSingle", true);
-                        intent.putExtra("userId", activityInfo.user_id);
-                        intent.putExtra("userName", activityInfo.user_name);
-                        startActivity(intent);
+                        ConversationActivity.enter(ActivityDetailActivity.this, activityInfo.user_id,
+                                getIntent().getStringExtra("userIcon"), activityInfo.user_name);
                     } else {
                         LoginActivity.enter(ActivityDetailActivity.this, true);
                     }
@@ -96,12 +94,23 @@ public class ActivityDetailActivity extends BaseProgressActivity {
 
                     @Override
                     public void onError(int errCode, String errMsg) {
-                        notifyLoadFinish(MSG_LOAD_FAILURE);
+                        if (errCode == -1) {
+                            notifyLoadFinish(MSG_NO_LOGIN);
+                        } else {
+                            notifyLoadFinish(MSG_LOAD_FAILURE);
+                        }
                     }
                 });
 
         LogUtil.i("receiver id====" + getIntent().getStringExtra("id"));
         activityQuery.doGetQuery(ServerConfig.urlWithSuffix(
                 String.format(ServerConfig.SPECIFIC_ACTIVITY, getIntent().getStringExtra("id"))));
+    }
+
+    public static void enter(Context context, String id, String userIcon) {
+        Intent intent = new Intent(context, ActivityDetailActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("userIcon", userIcon);
+        context.startActivity(intent);
     }
 }

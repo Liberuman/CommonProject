@@ -8,6 +8,9 @@ import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
+//import com.avos.avoscloud.AVOSCloud;
+//import com.avos.avoscloud.im.v2.AVIMClient;
+//import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
@@ -49,9 +52,8 @@ public class CommonApplication extends Application {
         AVOSCloud.setDebugLogEnabled(true);
 
         typeface = Typeface.createFromAsset(getAssets(), "fzlt.ttf");
-
         userInfo = UserManager.getInstance(this).getUserInfo();
-        if (!TextUtils.isEmpty(userInfo.id)) {
+        if (!TextUtils.isEmpty(userInfo.token)) {
             isLogined = true;
             startService(new Intent(this, ReceiverMsgService.class));
         }

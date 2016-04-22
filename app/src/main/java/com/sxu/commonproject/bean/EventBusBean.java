@@ -1,5 +1,7 @@
 package com.sxu.commonproject.bean;
 
+import com.avos.avoscloud.im.v2.AVIMMessage;
+
 /**
  * Created by juhg on 16/3/3.
  */
@@ -33,6 +35,14 @@ public class EventBusBean {
 
         public UpdateMsgList(ContactBean contactInfo) {
             this.contactInfo = contactInfo;
+        }
+    }
+
+    public static class UpdateConversation {
+        public AVIMMessage message;
+
+        public UpdateConversation(AVIMMessage message) {
+            this.message = message;
         }
     }
 }

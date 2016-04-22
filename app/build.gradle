@@ -91,17 +91,12 @@ dependencies {
     compile project(':pulltorefresh')
     compile project(':social_sdk_library_project')
     compile 'com.android.support:support-v4:23.+'
-    //avoscloud-sdk 为 LeanCloud基础包
-    compile 'cn.leancloud.android:avoscloud-sdk:v3.+'
-    //avoscloud-push 为推送与实时聊天需要的包
-    compile('cn.leancloud.android:avoscloud-push:v3.+@aar') { transitive = true }
-    //avoscloud-statistics 为 LeanCloud 统计包
-    compile 'cn.leancloud.android:avoscloud-statistics:v3.+'
-    //avoscloud-feedback 为 LeanCloud 用户反馈包
-    //compile ('cn.leancloud.android:avoscloud-feedback:v3.+@aar')
-    //avoscloud-sns 为 LeanCloud 第三方登录包
-    //compile ('cn.leancloud.android:avoscloud-sns:v3.+@aar')
-    //compile ('cn.leancloud.android:qq-sdk:1.6.1-leancloud')
-    //avoscloud-search 为 LeanCloud 应用内搜索包
-    //compile ('cn.leancloud.android:avoscloud-search:v3.+@aar')
+    compile 'cn.leancloud.android:avoscloud-sdk:v3.13.+'
+    compile ('cn.leancloud.android:avoscloud-push:v3.13.+@aar'){transitive = true}
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:cardview-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.3'
+    compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.github.stuxuhai:jpinyin:1.0'
 }

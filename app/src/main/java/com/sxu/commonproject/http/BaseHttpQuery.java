@@ -6,11 +6,15 @@ import android.os.Handler;
 import android.text.TextUtils;
 
 import com.sxu.commonproject.bean.BaseBean;
+import com.sxu.commonproject.bean.BaseProtocolBean;
 import com.sxu.commonproject.util.LogUtil;
+import com.sxu.commonproject.util.MD5Util;
 
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -23,15 +27,19 @@ import okhttp3.Response;
  */
 public class BaseHttpQuery<T extends BaseBean> {
 
-    private Context context;
-    private Class<T> TClass;
-    private OnQueryFinishListener queryFinishListener;
-    private Handler mainHandler;
+    protected Context context;
+    protected Class<T> TClass;
+    protected OnQueryFinishListener queryFinishListener;
+    protected Handler mainHandler;
     private BaseHttpClient httpClient;
+    /**
+     * 请求结果
+     */
+    public T queryResult;
 
-    private final int RESPONSE_CODE_DEFAULT = 100;        // 默认的应答code
-    private final int RESPONSE_CODE_EMPTY = 0;            // 数据请求为空
-    private final int RESPONSE_CODE_PARSE_ERROR = 2;      // 数据解析错误
+    protected final int RESPONSE_CODE_DEFAULT = 100;        // 默认的应答code
+    protected final int RESPONSE_CODE_EMPTY = 0;            // 数据请求为空
+    protected final int RESPONSE_CODE_PARSE_ERROR = 2;      // 数据解析错误
 
     public BaseHttpQuery(Context context, Class<T> TClass, OnQueryFinishListener<T> queryFinishListener) {
         this.context = context;
@@ -65,6 +73,7 @@ public class BaseHttpQuery<T extends BaseBean> {
                 formBuilder.add(item.getKey(), item.getValue());
             }
         }
+
         FormBody formBody = formBuilder.build();
         Request request = new Request.Builder().url(url).post(formBody).build();
         LogUtil.i("request==" + request.body());
@@ -80,10 +89,17 @@ public class BaseHttpQuery<T extends BaseBean> {
     }
 
     public void doGetQuery(String url, Map<String, String> param) {
+        url += "&sign=" + generateSign(url, param);
         asyncGet(url, param, new MyCallBack());
     }
 
+    public void doGetQuery(String url, Map<String, String> param, Callback responseCallback) {
+        url += "&sign=" + generateSign(url, param);
+        asyncGet(url, param, responseCallback);
+    }
+
     public void doPostQuery(String url, Map<String, String> param) {
+        url += "&sign=" + generateSign(url, param);
         asyncPost(url, param, new MyCallBack());
     }
 
@@ -102,13 +118,22 @@ public class BaseHttpQuery<T extends BaseBean> {
                     public void run() {
                         if (!TextUtils.isEmpty(content)) {
                             try {
-                                queryFinishListener.onFinish(BaseBean.fromJson(content, TClass));
+                                queryResult = BaseBean.fromJson(content, TClass);
+                                if (queryResult instanceof BaseProtocolBean) {
+                                    if (((BaseProtocolBean)queryResult).code == 1) {
+                                        queryFinishListener.onFinish(queryResult);
+                                    } else {
+                                        queryFinishListener.onError(((BaseProtocolBean) queryResult).code, ((BaseProtocolBean) queryResult).msg);
+                                    }
+                                } else {
+                                    queryFinishListener.onError(RESPONSE_CODE_PARSE_ERROR, "Bean对象没有继承BaseProtocolBean");
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace(System.out);
                                 queryFinishListener.onError(RESPONSE_CODE_PARSE_ERROR, "数据解析错误");
                             }
                         } else {
-                            queryFinishListener.onError(RESPONSE_CODE_EMPTY, "数据请求为空");
+                            queryFinishListener.onError(RESPONSE_CODE_EMPTY, "请求结果为空");
                         }
                     }
                 });
@@ -136,5 +161,40 @@ public class BaseHttpQuery<T extends BaseBean> {
     public interface OnQueryFinishListener<T extends BaseBean> {
         public void onFinish(T bean);
         public void onError(int errCode, String errMsg);
+    }
+
+    private String generateSign(String url, Map<String, String> params) {
+        String publicKey = "de17e9920a527243c6e3874f65f5e0ac";
+        TreeSet<String> paramSet = new TreeSet<>();
+        if (!TextUtils.isEmpty(url)) {
+            if (url.contains("?")) {
+                String urlParam = url.split("[?]")[1];
+                String[] urlAllParams = urlParam.split("&");
+                if (urlAllParams != null) {
+                    for (int i = 0; i < urlAllParams.length; i++) {
+                        paramSet.add(urlAllParams[i]);
+                    }
+                }
+            }
+        }
+
+        if (params != null && params.size() > 0) {
+            for (Map.Entry<String, String> entry : params.entrySet()) {
+                if (TextUtils.isEmpty(entry.getValue()) || entry.getValue().equals("null")) {
+                    paramSet.add(entry.getKey() + "=");
+                } else {
+                    paramSet.add(entry.getKey() + "=" + entry.getValue());
+                }
+            }
+        }
+
+        Iterator<String> iterator = paramSet.iterator();
+        StringBuffer paramPrefix = new StringBuffer();
+        while (iterator.hasNext()) {
+            paramPrefix.append("&");
+            paramPrefix.append(iterator.next());
+        }
+        LogUtil.i("params==" + paramPrefix.substring(1).toString());
+        return MD5Util.toMD5(publicKey + paramPrefix.substring(1).toString());
     }
 }

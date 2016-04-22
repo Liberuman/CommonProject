@@ -13,7 +13,7 @@ import com.sxu.commonproject.baseclass.BaseViewHolder;
 import com.sxu.commonproject.bean.NearbyUserBean;
 import com.sxu.commonproject.http.BaseHttpQuery;
 import com.sxu.commonproject.protocol.ServerConfig;
-import com.sxu.commonproject.util.FormatUtil;
+import com.sxu.commonproject.util.DistanceFormatUtil;
 import com.sxu.commonproject.util.LogUtil;
 import com.sxu.commonproject.util.ToastUtil;
 
@@ -96,7 +96,7 @@ public class NearByContactActivity extends BaseProgressActivity {
                 viewHolder.setText(R.id.nickname_text, data.nick_name);
                 viewHolder.setText(R.id.sign_text, data.sign);
                 if (!TextUtils.isEmpty(data.distance)) {
-                    viewHolder.setText(R.id.distance_text, FormatUtil.getFormatDistance(Float.parseFloat(data.distance)));
+                    viewHolder.setText(R.id.distance_text, DistanceFormatUtil.getFormatDistance(Float.parseFloat(data.distance)));
                 }
                 if (!TextUtils.isEmpty(data.icon)) {
                     viewHolder.setImageResource(R.id.user_icon, R.drawable.default_icon, null, data.icon);

@@ -128,7 +128,8 @@
         <!-- 高德地图定位服务-->
         <service android:name="com.amap.api.location.APSService"></service>
 
-        <activity android:name="com.sxu.commonproject.activity.MainActivity"
+        <activity android:name="com.sxu.commonproject.activity.SplashActivity"
+            android:theme="@style/SplashTheme"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -136,7 +137,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name="com.sxu.commonproject.activity.NewUserGuideActivity"/>
+        <activity android:name="com.sxu.commonproject.activity.MainActivity"/>
         <activity android:name="com.sxu.commonproject.activity.ActivityDetailActivity"/>
 
         <activity android:name="com.sxu.commonproject.activity.LaunchActivityActivity"/>

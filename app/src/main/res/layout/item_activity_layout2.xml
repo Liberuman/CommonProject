@@ -9,8 +9,7 @@
     <ImageView
         android:id="@+id/activity_icon"
         android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:background="@drawable/test_icon"/>
+        android:layout_height="60dp" />
     <TextView
         android:id="@+id/activity_title_text"
         android:layout_width="match_parent"

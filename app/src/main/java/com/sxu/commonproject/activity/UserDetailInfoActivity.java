@@ -115,7 +115,7 @@ public class UserDetailInfoActivity extends BaseProgressActivity {
                 genderText.setText("女");
             }
             telNumberText.setText(userInfo.tel_number);
-            signEdit.setText(userInfo.sign);
+            signEdit.setText(userInfo.signature);
             if (!TextUtils.isEmpty(userInfo.icon)) {
                 Glide.with(this).load(userInfo.icon).asBitmap().into(new SimpleTarget<Bitmap>(screenWidth, screenWidth*2/3) {
                     @Override
@@ -134,7 +134,7 @@ public class UserDetailInfoActivity extends BaseProgressActivity {
             @Override
             public void onClick(View v) {
                 if (CommonApplication.isLogined) {
-                    ConversationActivity.enter(UserDetailInfoActivity.this, userInfo.id, userInfo.nick_name, true);
+                    ConversationActivity.enter(UserDetailInfoActivity.this, userInfo.id, userInfo.icon, userInfo.nick_name);
                 } else {
                     ToastUtil.show(UserDetailInfoActivity.this, "请先登录");
                     startActivity(new Intent(UserDetailInfoActivity.this, LoginActivity.class));

@@ -32,8 +32,10 @@ public abstract class BaseActivity extends FragmentActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // 设置Activity的切换动画
         overridePendingTransition(R.anim.splash_push_left_in, R.anim.splash_push_left_out);
-        setContentView(getLayoutResId());
-        getViews();
+        if (getLayoutResId() != 0) {
+            setContentView(getLayoutResId());
+            getViews();
+        }
         initActivity();
     }
 

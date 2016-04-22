@@ -1,5 +1,13 @@
 package com.sxu.commonproject.protocol;
 
+import android.os.Build;
+
+import com.sxu.commonproject.app.CommonApplication;
+import com.sxu.commonproject.util.AndroidPlatformUtil;
+import com.sxu.commonproject.util.NetworkUtil;
+import com.sxu.commonproject.util.SharePreferenceTag;
+import com.sxu.commonproject.view.PreferenceUtil;
+
 /**
  * Created by juhg on 16/2/26.
  */
@@ -9,6 +17,8 @@ public class ServerConfig {
     public static String LATEST_ACTIVITIES = "ActivityController/get_latest_activities?page=%s";
     // 获取指定类型的活动列表
     public static String SPECIFIC_TYPE_ACTIVITIES = "ActivityController/get_specific_type_activities?type=%s";
+    // 获取已发布的活动列表
+    public static String LAUNCHED_ACTIVITIES = "ActivityController/get_launched_activities?user_id=%s";
     // 获取指定的活动信息
     public static String SPECIFIC_ACTIVITY = "ActivityController/get_specific_activity?id=%s";
     // 添加新的活动
@@ -45,12 +55,35 @@ public class ServerConfig {
     public static String UPDATE_USER_INFO = "UserController/update_user_info";
     // 获取附近的人
     public static String GET_NEARBY_USERS = "UserController/get_nearby_users?lng=%s&lat=%s";
+    // 检查版本更新
+    public static String CHECK_VERSION = "VersionController/update_version";
 
     public static String getServerAddress() {
+        //return "http://192.168.1.56:8080/";
         return "http://139.196.153.190/";
     }
 
     public static String urlWithSuffix(String suffix) {
-        return getServerAddress() + suffix;
+        if (suffix.contains("?")) {
+            return getServerAddress() + suffix + "&" + addParamPrefix();
+        } else {
+            return getServerAddress() + suffix + "?" + addParamPrefix();
+        }
+    }
+
+    /**
+     * 为网络请求添加公共参数
+     * @return
+     */
+    public static String addParamPrefix() {
+        return "deviceId=" + AndroidPlatformUtil.getPhoneDeviceId(CommonApplication.getInstance())
+                + "&wifiMac=" + AndroidPlatformUtil.getWifiMacAddress(CommonApplication.getInstance())
+                + "&version=" + AndroidPlatformUtil.getVersion(CommonApplication.getInstance())
+                + "&channel=" + AndroidPlatformUtil.getChannel(CommonApplication.getInstance())
+                + "&sysVersion=" + Build.VERSION.RELEASE
+                + "&osType=" + "android"
+                + "&carrier=" + NetworkUtil.getCarrierName(CommonApplication.getInstance())
+                + "&network=" + NetworkUtil.getNetworkName(CommonApplication.getInstance())
+                + "&token=" + PreferenceUtil.getString(SharePreferenceTag.TOKEN, "");
     }
 }

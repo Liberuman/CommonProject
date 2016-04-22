@@ -22,25 +22,25 @@
         android:layout_height="45dp"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/confirm_text"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="确定"
-            android:textSize="15sp"
-            android:textColor="@color/themeColor"/>
-        <TextView
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:background="#e0e0e0"/>
-        <TextView
             android:id="@+id/cancel_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="取消"
+            android:textSize="15sp"
+            android:textColor="#666666"/>
+        <TextView
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="#e0e0e0"/>
+        <TextView
+            android:id="@+id/confirm_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="确定"
             android:textSize="15sp"
             android:textColor="@color/themeColor"/>
     </LinearLayout>

@@ -1,5 +1,6 @@
 package com.sxu.commonproject.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
@@ -128,6 +129,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         loginText.setOnClickListener(this);
     }
 
+    /**
+     * 跳转到登录页面
+     * @param context
+     * @param flag 在其他页面需要登录时flag应置为true, 正常登录流程置为false
+     */
     public static void enter(Context context, boolean flag) {
         Intent intent = new Intent(context, LoginActivity.class);
         intent.putExtra("flag", flag);

@@ -9,8 +9,7 @@
         android:background="#e0e0e0"/>
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/test"/>
+        android:layout_height="150dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

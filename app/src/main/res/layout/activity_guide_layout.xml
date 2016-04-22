@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+
+   <android.support.v4.view.ViewPager
+        android:id="@+id/guide_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:clipChildren="false" />
+
+    <LinearLayout
+        android:id="@+id/indicator_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:orientation="horizontal" >
+        <View
+            android:id="@+id/indicator0"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:background="@drawable/indicator_selected" />
+        <View
+            android:id="@+id/indicator1"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/indicator_unselected" />
+        <View
+            android:id="@+id/indicator2"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/indicator_unselected" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/entry_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/indicator_all"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="50dp"
+        android:src="@drawable/entry_icon"
+        android:visibility="gone"
+        />
+</RelativeLayout>

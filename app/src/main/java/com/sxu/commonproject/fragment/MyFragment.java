@@ -24,8 +24,14 @@ import com.sxu.commonproject.activity.LoginActivity;
 import com.sxu.commonproject.activity.MyInfoActivity;
 import com.sxu.commonproject.activity.SubmitSuggestionActivity;
 import com.sxu.commonproject.app.CommonApplication;
+import com.sxu.commonproject.baseclass.DownloadProgressListener;
+import com.sxu.commonproject.baseclass.FileDownload;
+import com.sxu.commonproject.baseclass.FileDownloaderManager;
+import com.sxu.commonproject.bean.VersionBean;
+import com.sxu.commonproject.manager.PathManager;
 import com.sxu.commonproject.manager.UserManager;
 import com.sxu.commonproject.bean.EventBusBean;
+import com.sxu.commonproject.manager.VersionUpdateManager;
 import com.sxu.commonproject.util.LogUtil;
 import com.sxu.commonproject.util.ToastUtil;
 import com.sxu.commonproject.view.ShareDialog;
@@ -81,7 +87,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
         if (CommonApplication.isLogined) {
             nicknameText.setText(CommonApplication.userInfo.nick_name);
             if (!TextUtils.isEmpty(CommonApplication.userInfo.icon)) {
-                Glide.with(getActivity()).load(CommonApplication.userInfo.icon).into(loginIcon);
+                Glide.with(getActivity()).load(CommonApplication.userInfo.icon).error(R.drawable.default_icon).into(loginIcon);
             } else {
                 loginIcon.setImageResource(R.drawable.default_icon);
             }
@@ -145,6 +151,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 }
                 break;
             case R.id.version_layout:
+                VersionUpdateManager updateManager = new VersionUpdateManager(getActivity());
+                updateManager.checkVersion();
                 break;
             case R.id.about_layout:
                 startActivity(new Intent(getActivity(), AboutActivity.class));
@@ -170,8 +178,8 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
                 Glide.with(getActivity())
                         .load(event.userInfo.icon)
                         .transform(new GlideCircleTransform(getActivity()))
-                        .placeholder(R.drawable.test3)
-                        .error(R.drawable.test3)
+                        .placeholder(R.drawable.default_icon)
+                        .error(R.drawable.default_icon)
                         .into(loginIcon);
             }
         }
@@ -180,7 +188,7 @@ public class MyFragment extends BaseFragment implements View.OnClickListener {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(EventBusBean.LogoutBean event) {
         nicknameText.setText("请点击登录");
-        loginIcon.setImageResource(R.drawable.test3);
+        loginIcon.setImageResource(R.drawable.login_icon);
     }
 
     public class GlideCircleTransform extends BitmapTransformation {

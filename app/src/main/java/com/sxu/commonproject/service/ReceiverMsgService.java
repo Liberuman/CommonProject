@@ -7,6 +7,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.text.TextUtils;
 
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
@@ -43,7 +44,7 @@ public class ReceiverMsgService extends Service {
     public void onCreate() {
         super.onCreate();
     }
-    
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         AVIMMessageManager.registerMessageHandler(AVIMMessage.class, new CustomMessageHandler());
@@ -56,36 +57,42 @@ public class ReceiverMsgService extends Service {
         return null;
     }
 
-    private void loginLeanCloud(){
-        CommonApplication.client = AVIMClient.getInstance(UserManager.getInstance(this).getUserId());
-        CommonApplication.client.open(new AVIMClientCallback(){
-            @Override
-            public void done(AVIMClient client,AVIMException e){
-                if(e != null){
-                    e.printStackTrace(System.out);
+    private void loginLeanCloud() {
+        if (!TextUtils.isEmpty(UserManager.getInstance(this).getUserName())) {
+            CommonApplication.client = AVIMClient.getInstance(CommonApplication.userInfo.nick_name);
+            LogUtil.i("客户端==" + CommonApplication.client.getClientId());
+            CommonApplication.client.open(new AVIMClientCallback() {
+                @Override
+                public void done(AVIMClient client, AVIMException e) {
+                    if (e != null) {
+                        e.printStackTrace(System.out);
+                    } else {
+                        LogUtil.i("客户端 连接成功==" + client.getClientId());
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     public class CustomMessageHandler extends AVIMMessageHandler {
         //接收到消息后的处理逻辑
         @Override
-        public void onMessage(AVIMMessage message,AVIMConversation conversation,AVIMClient client){
-            LogUtil.d("onMessage" + message.getContent());
-            showNotification(client.getClientId(), message.getContent());
+        public void onMessage(AVIMMessage message, AVIMConversation conversation, AVIMClient client) {
+            LogUtil.d("onMessage" + message.getContent() + conversation.getName());
+            showNotification(conversation.getName(), message.getContent());
             getUserInfo(client.getClientId(), message.getContent());
+            EventBus.getDefault().post(new EventBusBean.UpdateConversation(message));
         }
 
-        public void onMessageReceipt(AVIMMessage message,AVIMConversation conversation,AVIMClient client){
+        public void onMessageReceipt(AVIMMessage message, AVIMConversation conversation, AVIMClient client) {
             LogUtil.d("onMessageReceipt");
         }
     }
 
     private void showNotification(String clientId, String content) {
-        NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         Intent intent = new Intent(this, ConversationActivity.class);
-        intent.putExtra("userId", clientId);
+        intent.putExtra("userName", clientId);
         intent.putExtra("isSingle", true);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new Notification.Builder(this)
@@ -106,9 +113,9 @@ public class ReceiverMsgService extends Service {
             public void onFinish(UserBean bean) {
                 if (bean.code == 1 && bean.data != null) {
                     // 更新消息列表页面
-                    ContactBean contact = new ContactBean(bean.data.id, R.drawable.ic_launcher, bean.data.nick_name,
-                    content, getCurrentTime());
-                    EventBus.getDefault().post(new EventBusBean.UpdateMsgList(contact));
+                    //ContactBean contact = new ContactBean(bean.data.id, R.drawable.ic_launcher, bean.data.nick_name,
+                    //content, getCurrentTime());
+                    //EventBus.getDefault().post(new EventBusBean.UpdateMsgList(contact));
                 } else {
                     ToastUtil.show(ReceiverMsgService.this, bean.msg);
                 }
@@ -123,8 +130,7 @@ public class ReceiverMsgService extends Service {
         userInfoQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.GET_USER_INFO, userId)));
     }
 
-    private String getCurrentTime()
-    {
+    private String getCurrentTime() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return df.format(new Date());
     }

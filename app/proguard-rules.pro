@@ -233,3 +233,7 @@
 -dontwarn com.alibaba.fastjson.**
 -dontwarn com.loopj.android.http.**
 -dontwarn com.avos.avoscloud.**
+-dontwarn butterknife.internal.**
+
+# 不混淆cleancloud
+-keep class com.avos.** { *;}

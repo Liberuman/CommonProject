@@ -172,12 +172,18 @@ public abstract class BaseProgressActivity<T extends BaseBean> extends Activity 
                 resultText.setText("您好像没有连接网络");
                 break;
             case MSG_LOAD_MORE_FINISH:
+                if (commonAdapter != null) {
+                    commonAdapter.notifyDataSetChanged();
+                } else {
+                    setCommonAdapter();
+                }
                 break;
             case MSG_LOAD_NO_MORE:
                 ToastUtil.show(this, "没有更多数据啦~");
                 break;
             case MSG_NO_LOGIN:
                 // 启动登录窗口
+                LoginActivity.enter(this, true);
                 break;
             default:
                 break;

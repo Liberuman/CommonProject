@@ -10,8 +10,7 @@
     <ImageView
         android:id="@+id/icon"
         android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:src="@drawable/test1"/>
+        android:layout_height="65dp" />
     <TextView
         android:id="@+id/nickname_text"
         android:layout_width="wrap_content"

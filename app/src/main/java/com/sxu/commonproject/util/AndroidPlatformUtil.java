@@ -2,7 +2,9 @@ package com.sxu.commonproject.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
@@ -27,7 +29,7 @@ public class AndroidPlatformUtil {
      * @param context
      * @return
      */
-    public static String getMacAddress(Context context) {
+    public static String getWifiMacAddress(Context context) {
         WifiManager wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         if (wifiManager != null && wifiManager.getConnectionInfo() != null) {
             return wifiManager.getConnectionInfo().getMacAddress();
@@ -100,13 +102,54 @@ public class AndroidPlatformUtil {
         return (int)(px / scale + 0.5f);
     }
 
+    /**
+     * 获取应用的版本号
+     * @param context
+     * @return
+     */
     public static String getVersion(Context context) {
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            String version = packageInfo.versionName;
             return packageInfo.versionName;
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        return "";
+    }
+
+    /**
+     * 获取版本的code
+     * @param context
+     * @return
+     */
+    public static int getVersionCode(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            return packageInfo.versionCode;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return Integer.MAX_VALUE;
+    }
+
+    /**
+     * 获取渠道号
+     * @param context
+     * @return
+     */
+    public static String getChannel(Context context) {
+        PackageManager pm = context.getPackageManager();
+        if (pm != null) {
+            try {
+                ApplicationInfo appInfo = pm.getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+                if (appInfo != null && appInfo.metaData != null) {
+                    return appInfo.metaData.get("channelNo") + "";
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         return "";

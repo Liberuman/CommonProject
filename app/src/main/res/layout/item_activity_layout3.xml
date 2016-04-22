@@ -10,8 +10,7 @@
         android:id="@+id/activity_icon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerCrop"
-        android:src="@drawable/test_icon"/>
+        android:scaleType="centerCrop" />
     <TextView
         android:id="@+id/activity_title_text"
         android:layout_width="match_parent"

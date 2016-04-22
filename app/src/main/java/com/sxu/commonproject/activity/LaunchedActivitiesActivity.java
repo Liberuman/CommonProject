@@ -4,11 +4,6 @@ package com.sxu.commonproject.activity;
  * Created by Administrator on 2016/4/9 0009.
  */
 
-import android.content.Intent;
-import android.location.Location;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -18,39 +13,8 @@ import com.sxu.commonproject.baseclass.BaseCommonAdapter;
 import com.sxu.commonproject.baseclass.BaseViewHolder;
 import com.sxu.commonproject.bean.ActivityBean;
 import com.sxu.commonproject.bean.EventBusBean;
-import com.sxu.commonproject.fragment.BaseProgressFragment;
 import com.sxu.commonproject.http.BaseHttpQuery;
 import com.sxu.commonproject.protocol.ServerConfig;
-import com.sxu.commonproject.util.FormatUtil;
-import com.sxu.commonproject.util.LogUtil;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import android.content.Intent;
-import android.location.Location;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import com.handmark.pulltorefresh.library.PullToRefreshBase;
-import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.sxu.commonproject.R;
-import com.sxu.commonproject.activity.ActivityDetailActivity;
-import com.sxu.commonproject.activity.UserDetailInfoActivity;
-import com.sxu.commonproject.app.CommonApplication;
-import com.sxu.commonproject.baseclass.BaseCommonAdapter;
-import com.sxu.commonproject.baseclass.BaseViewHolder;
-import com.sxu.commonproject.bean.ActivityBean;
-import com.sxu.commonproject.bean.EventBusBean;
-import com.sxu.commonproject.http.BaseHttpQuery;
-import com.sxu.commonproject.protocol.ServerConfig;
-import com.sxu.commonproject.util.FormatUtil;
 import com.sxu.commonproject.util.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -152,7 +116,7 @@ public class LaunchedActivitiesActivity extends BaseProgressActivity {
                     }
                 });
 
-        activityQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.LATEST_ACTIVITIES, currentPage)));
+        activityQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.LAUNCHED_ACTIVITIES, currentPage)));
     }
 
     @Override

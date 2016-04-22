@@ -163,7 +163,7 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
                 genderText.setText("女");
             }
             telNumberText.setText(userInfo.tel_number);
-            signEdit.setText(userInfo.sign);
+            signEdit.setText(userInfo.signature);
             if (!TextUtils.isEmpty(userInfo.icon)) {
                 Glide.with(this).load(userInfo.icon).asBitmap().into(new SimpleTarget<Bitmap>(screenWidth, screenWidth * 2 / 3) {
                     @Override
@@ -331,7 +331,7 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
             public void onFinish(BaseCommonProtocolBean bean) {
                 if (bean.code == 1) {
                     userInfo.gender = gender + "";
-                    userInfo.sign = signEdit.getText().toString();
+                    userInfo.signature = signEdit.getText().toString();
                     UserManager.getInstance(MyInfoActivity.this).saveUserInfo(userInfo);
                     ToastUtil.show(MyInfoActivity.this, "信息更新成功");
                 } else {

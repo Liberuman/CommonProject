@@ -8,12 +8,13 @@ import android.widget.AdapterView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.sxu.commonproject.R;
+import com.sxu.commonproject.app.CommonApplication;
 import com.sxu.commonproject.baseclass.BaseCommonAdapter;
 import com.sxu.commonproject.baseclass.BaseViewHolder;
 import com.sxu.commonproject.bean.ActivityBean;
 import com.sxu.commonproject.http.BaseHttpQuery;
 import com.sxu.commonproject.protocol.ServerConfig;
-import com.sxu.commonproject.util.FormatUtil;
+import com.sxu.commonproject.util.DistanceFormatUtil;
 import com.sxu.commonproject.util.LogUtil;
 
 import java.util.ArrayList;
@@ -51,9 +52,11 @@ public class SpecificActivityActivity extends BaseProgressActivity {
         activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(SpecificActivityActivity.this, ActivityDetailActivity.class);
-                intent.putExtra("id", activityData.get((int)id).id);
-                startActivity(intent);
+                if (CommonApplication.isLogined) {
+                    ActivityDetailActivity.enter(SpecificActivityActivity.this, activityData.get((int) id).id, activityData.get((int) id).user_icon);
+                } else {
+                    LoginActivity.enter(SpecificActivityActivity.this, true);
+                }
             }
         });
     }
@@ -93,7 +96,7 @@ public class SpecificActivityActivity extends BaseProgressActivity {
                     viewHolder.setText(R.id.activity_title_text, data.title);
                     if (!TextUtils.isEmpty(data.distance)) {
                         float distance = Float.parseFloat(data.distance);
-                        viewHolder.setText(R.id.distance_text, FormatUtil.getFormatDistance(distance));
+                        viewHolder.setText(R.id.distance_text, DistanceFormatUtil.getFormatDistance(distance));
                     }
                     viewHolder.setText(R.id.poster_name_text, data.user_name);
                     viewHolder.setText(R.id.post_time_text, data.create_time);

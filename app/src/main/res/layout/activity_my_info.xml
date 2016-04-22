@@ -14,8 +14,8 @@
         android:gravity="center"
         android:orientation="vertical">
         <FrameLayout
-            android:layout_width="82dp"
-            android:layout_height="82dp"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
             android:layout_marginTop="25dp"
             android:background="@drawable/icon_bg">
         <com.sxu.commonproject.view.CircleImageView

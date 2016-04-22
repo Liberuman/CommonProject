@@ -1,7 +1,6 @@
 package com.sxu.commonproject.fragment;
 
 import android.content.Intent;
-import android.location.Location;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +10,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.activity.ActivityDetailActivity;
+import com.sxu.commonproject.activity.LoginActivity;
+import com.sxu.commonproject.activity.SpecificActivityActivity;
 import com.sxu.commonproject.activity.UserDetailInfoActivity;
 import com.sxu.commonproject.app.CommonApplication;
 import com.sxu.commonproject.baseclass.BaseCommonAdapter;
@@ -19,7 +20,7 @@ import com.sxu.commonproject.bean.ActivityBean;
 import com.sxu.commonproject.bean.EventBusBean;
 import com.sxu.commonproject.http.BaseHttpQuery;
 import com.sxu.commonproject.protocol.ServerConfig;
-import com.sxu.commonproject.util.FormatUtil;
+import com.sxu.commonproject.util.DistanceFormatUtil;
 import com.sxu.commonproject.util.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
@@ -62,10 +63,11 @@ public class HomeFragment extends BaseProgressFragment {
         activityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), ActivityDetailActivity.class);
-                LogUtil.i("id====" + activityData.get((int) id).id);
-                intent.putExtra("id", activityData.get((int) id).id);
-                startActivity(intent);
+                if (CommonApplication.isLogined) {
+                    ActivityDetailActivity.enter(getActivity(), activityData.get((int) id).id, activityData.get((int) id).user_icon);
+                } else {
+                    LoginActivity.enter(getActivity(), true);
+                }
             }
         });
 
@@ -83,27 +85,6 @@ public class HomeFragment extends BaseProgressFragment {
                 requestData();
             }
         });
-
-        double lat = 31.210491;
-        double lon = 121.522448;
-        double[][] latlon = {
-                {31.220491, 121.522448},
-                {31.215491, 121.522458},
-                {31.510491, 121.523448},
-                {32.210491, 121.512448},
-                {31.210691, 121.522448},
-                {31.210498, 121.532448},
-                {31.210401, 121.522548},
-        };
-
-        for (int i = 0; i < latlon.length; i++) {
-            LogUtil.i("latlon[" + i + "]: distance===" + getDistance(lat, lon, latlon[i][0], latlon[i][1]));
-            float[] result = new float[5];
-            Location.distanceBetween(lat, lon, latlon[i][0], latlon[i][1], result);
-            LogUtil.i("android distance==" + result[0]);
-        }
-
-
     }
 
     @Override
@@ -116,7 +97,7 @@ public class HomeFragment extends BaseProgressFragment {
                 if (bean.data != null && bean.data.size() > 0) {
                     if (currentPage == 1) {
                         if (isFirstLoad) {
-                            notifyLoadFinish(MSG_LOAD_FIRST_FINISH);
+                            notifyLoadFinish(MSG_LOAD_FINISH);
                         } else {
                             notifyLoadFinish(MSG_LOAD_REFRESH_FINISH);
                         }
@@ -171,7 +152,7 @@ public class HomeFragment extends BaseProgressFragment {
                     viewHolder.setText(R.id.activity_title_text, data.title);
                     if (!TextUtils.isEmpty(data.distance)) {
                         float distance = Float.parseFloat(data.distance);
-                        viewHolder.setText(R.id.distance_text, FormatUtil.getFormatDistance(distance));
+                        viewHolder.setText(R.id.distance_text, DistanceFormatUtil.getFormatDistance(distance));
                     }
                     viewHolder.setText(R.id.poster_name_text, data.user_name);
                     viewHolder.setText(R.id.post_time_text, data.create_time);
@@ -180,9 +161,13 @@ public class HomeFragment extends BaseProgressFragment {
                     viewHolder.getView(R.id.user_icon).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(getActivity(), UserDetailInfoActivity.class);
-                            intent.putExtra("userId", activityInfo.user_id);
-                            startActivity(intent);
+                            if (CommonApplication.isLogined) {
+                                Intent intent = new Intent(getActivity(), UserDetailInfoActivity.class);
+                                intent.putExtra("userId", activityInfo.user_id);
+                                startActivity(intent);
+                            } else {
+                                LoginActivity.enter(getActivity(), true);
+                            }
                         }
                     });
                 }

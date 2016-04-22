@@ -14,8 +14,9 @@ public class UserBean extends BaseProtocolBean {
         public String nick_name;
         public String tel_number;
         public String gender;
-        public String sign;
+        public String signature;
         public String passwd;
+        public String token;
         public String has_passwd;
         public String longitude;
         public String latitude;

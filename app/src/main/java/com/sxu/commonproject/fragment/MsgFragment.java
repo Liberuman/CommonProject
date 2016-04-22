@@ -8,6 +8,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.im.v2.AVIMClient;
+import com.avos.avoscloud.im.v2.AVIMConversation;
+import com.avos.avoscloud.im.v2.AVIMConversationQuery;
+import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
+import com.avos.avoscloud.im.v2.callback.AVIMConversationQueryCallback;
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.activity.ConversationActivity;
 import com.sxu.commonproject.activity.LoginActivity;
@@ -18,7 +24,7 @@ import com.sxu.commonproject.baseclass.BaseViewHolder;
 import com.sxu.commonproject.bean.ContactBean;
 import com.sxu.commonproject.bean.EventBusBean;
 import com.sxu.commonproject.util.LogUtil;
-import com.sxu.commonproject.util.TimeUtil;
+import com.sxu.commonproject.util.TimeFormatUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -71,8 +77,37 @@ public class MsgFragment extends BaseFragment {
                     intent.putExtra("userName", contactData.get((int) id).nick_name);
                     intent.putExtra("isSingle", true);
                     startActivity(intent);
+                    ConversationActivity.enter(getActivity(), contactData.get((int) id).id,
+                            contactData.get((int) id).icon, contactData.get((int) id).nick_name);
                 } else {
-                    startActivity(new Intent(getActivity(), NearByContactActivity.class));
+                    if (CommonApplication.isLogined) {
+                        startActivity(new Intent(getActivity(), NearByContactActivity.class));
+                    } else {
+                        LoginActivity.enter(getActivity(), true);
+                    }
+                }
+            }
+        });
+    }
+
+    private void getLatestContact() {
+        AVIMClient tom = AVIMClient.getInstance("Tom");
+        tom.open(new AVIMClientCallback(){
+
+            @Override
+            public void done(AVIMClient client,AVIMException e){
+                if(e==null){
+                    //登录成功
+                    AVIMConversationQuery query = client.getQuery();
+                    query.findInBackground(new AVIMConversationQueryCallback(){
+                        @Override
+                        public void done(List<AVIMConversation> convs, AVIMException e){
+                            if(e==null){
+                                //convs就是获取到的conversation列表
+                                //注意：按每个对话的最后更新日期（收到最后一条消息的时间）倒序排列
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -82,10 +117,10 @@ public class MsgFragment extends BaseFragment {
         contactAdapter = new BaseCommonAdapter<ContactBean>(getActivity(), contactData, R.layout.item_msg_layout) {
             @Override
             public void convert(BaseViewHolder viewHolder, ContactBean data) {
-                ((ImageView)viewHolder.getView(R.id.icon)).setImageResource(data.icon);
+                //((ImageView)viewHolder.getView(R.id.icon)).setImageResource(data.icon);
                 viewHolder.setText(R.id.nickname_text, data.nick_name);
                 viewHolder.setText(R.id.msg_content_text, data.content);
-                viewHolder.setText(R.id.time_text, TimeUtil.getTimeDesc(TimeUtil.strTimeToLong(data.time)));
+                viewHolder.setText(R.id.time_text, TimeFormatUtil.getTimeDesc(TimeFormatUtil.strTimeToLong(data.time)));
             }
         };
 

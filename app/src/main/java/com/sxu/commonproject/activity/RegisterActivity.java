@@ -13,6 +13,7 @@ import com.sxu.commonproject.baseclass.BaseCommonProtocolBean;
 import com.sxu.commonproject.bean.EventBusBean;
 import com.sxu.commonproject.bean.UserBean;
 import com.sxu.commonproject.http.BaseHttpQuery;
+import com.sxu.commonproject.manager.UserManager;
 import com.sxu.commonproject.protocol.ServerConfig;
 import com.sxu.commonproject.util.ToastUtil;
 import com.sxu.commonproject.util.VerificationUtil;
@@ -166,6 +167,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onFinish(UserBean bean) {
                 if (bean.code == 1 && bean.data != null) {
+                    UserManager.getInstance(RegisterActivity.this).saveUserInfo(bean.data);
                     EventBus.getDefault().post(new EventBusBean.LoginBean(bean.data));
                     MainActivity.enter(RegisterActivity.this, 3);
                     finish();
