@@ -191,6 +191,22 @@
     public <init>(android.content.Context);
 }
 
+#============================================================================
+#   keep fresco library and ignore its wraning
+#============================================================================
+-keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
+# Do notstrip any method/class that is annotated with @DoNotStrip
+-keep @com.facebook.common.internal.DoNotStrip class *
+-keepclassmembers class * {
+   @com.facebook.common.internal.DoNotStrip *;
+}
+# Keepnative methods
+-keepclassmembers class * {
+    native <methods>;
+}
+-dontwarn com.android.volley.toolbox.**
+
+
 -keepclasseswithmembernames class * {
     public <init>(android.content.Context, android.util.AttributeSet);
 }

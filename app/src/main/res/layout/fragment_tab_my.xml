@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:scrollbars="none">
     <LinearLayout
         android:orientation="vertical"
@@ -14,10 +15,12 @@
             android:gravity="center"
             android:orientation="vertical"
             android:background="#FFFFFF">
-            <com.sxu.commonproject.view.CircleImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/login_icon"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                app:roundAsCircle="true"
+                app:placeholderImage="@drawable/login_icon"
                 android:src="@drawable/login_icon"/>
             <TextView
                 android:id="@+id/nickname_text"
@@ -91,8 +94,8 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="#f7f7f7"/>
+            android:layout_height="1px"
+            android:background="#e0e0e0"/>
         <LinearLayout
             android:id="@+id/suggestion_layout"
             android:layout_width="match_parent"

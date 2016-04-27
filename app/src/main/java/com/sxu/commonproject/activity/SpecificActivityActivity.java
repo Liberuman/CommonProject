@@ -16,6 +16,7 @@ import com.sxu.commonproject.http.BaseHttpQuery;
 import com.sxu.commonproject.protocol.ServerConfig;
 import com.sxu.commonproject.util.DistanceFormatUtil;
 import com.sxu.commonproject.util.LogUtil;
+import com.sxu.commonproject.util.TimeFormatUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,7 @@ public class SpecificActivityActivity extends BaseProgressActivity {
                         viewHolder.setText(R.id.distance_text, DistanceFormatUtil.getFormatDistance(distance));
                     }
                     viewHolder.setText(R.id.poster_name_text, data.user_name);
-                    viewHolder.setText(R.id.post_time_text, data.create_time);
+                    viewHolder.setText(R.id.post_time_text, TimeFormatUtil.getTimeDesc(data.create_time));
                     viewHolder.setImageResource(R.id.user_icon, R.drawable.ic_launcher, null, data.user_icon);
                 }
             };

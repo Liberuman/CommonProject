@@ -18,6 +18,7 @@ import com.sxu.commonproject.fragment.FindFragment;
 import com.sxu.commonproject.fragment.HomeFragment;
 import com.sxu.commonproject.fragment.MsgFragment;
 import com.sxu.commonproject.fragment.MyFragment;
+import com.sxu.commonproject.util.LogUtil;
 import com.sxu.commonproject.util.ToastUtil;
 import com.sxu.commonproject.view.NavigationBar;
 
@@ -96,6 +97,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        LogUtil.i("onNewIntent");
         int page = intent.getIntExtra("page", 0);
         viewPager.setCurrentItem(page, false);
         tabRadios[page].setChecked(true);

@@ -138,7 +138,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.sxu.commonproject.activity.NewUserGuideActivity"/>
-        <activity android:name="com.sxu.commonproject.activity.MainActivity"/>
+        <activity android:name="com.sxu.commonproject.activity.MainActivity"
+            android:launchMode="singleTask"/>
         <activity android:name="com.sxu.commonproject.activity.ActivityDetailActivity"/>
 
         <activity android:name="com.sxu.commonproject.activity.LaunchActivityActivity"/>

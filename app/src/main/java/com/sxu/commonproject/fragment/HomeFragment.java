@@ -22,6 +22,7 @@ import com.sxu.commonproject.http.BaseHttpQuery;
 import com.sxu.commonproject.protocol.ServerConfig;
 import com.sxu.commonproject.util.DistanceFormatUtil;
 import com.sxu.commonproject.util.LogUtil;
+import com.sxu.commonproject.util.TimeFormatUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -57,6 +58,7 @@ public class HomeFragment extends BaseProgressFragment {
         activityList.setShowIndicator(false);
         setCommonAdapter();
         if (!EventBus.getDefault().isRegistered(this)) {
+            LogUtil.i("eventBus已注册");
             EventBus.getDefault().register(this);
         }
 
@@ -155,7 +157,7 @@ public class HomeFragment extends BaseProgressFragment {
                         viewHolder.setText(R.id.distance_text, DistanceFormatUtil.getFormatDistance(distance));
                     }
                     viewHolder.setText(R.id.poster_name_text, data.user_name);
-                    viewHolder.setText(R.id.post_time_text, data.create_time);
+                    viewHolder.setText(R.id.post_time_text, TimeFormatUtil.getTimeDesc(data.create_time));
                     viewHolder.setImageResource(R.id.user_icon, R.drawable.ic_launcher, null, data.user_icon);
                     final ActivityBean.ActivityItemBean activityInfo = data;
                     viewHolder.getView(R.id.user_icon).setOnClickListener(new View.OnClickListener() {
@@ -186,8 +188,11 @@ public class HomeFragment extends BaseProgressFragment {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onEventMainThread(EventBusBean.UpdateActivityBean event) {
+    public void onEvent(EventBusBean.UpdateActivityBean event) {
         if (event.needUpdate) {
+            LogUtil.i("更新首页数据");
+            currentPage = 1;
+            activityData.clear();
             requestData();
         }
     }

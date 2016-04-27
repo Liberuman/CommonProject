@@ -2,6 +2,7 @@ package com.sxu.commonproject.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +25,12 @@ import com.avos.avoscloud.im.v2.callback.AVIMConversationCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationCreatedCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationQueryCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMMessagesQueryCallback;
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.app.CommonApplication;
+import com.sxu.commonproject.baseclass.ACache;
 import com.sxu.commonproject.baseclass.AVImClientManager;
 import com.sxu.commonproject.manager.UserManager;
 import com.sxu.commonproject.util.LogUtil;
@@ -106,6 +108,11 @@ public class ConversationActivity extends BaseActivity {
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         conversationList = pullToRefreshListView.getRefreshableView();
         navigationBar.showReturnIcon().setTitle(userName);
+        // 缓存用户头像，便于在消息列表页面展示
+        if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(userIcon)) {
+            ACache cache = ACache.get(CommonApplication.getInstance());
+            cache.put(userName, userIcon);
+        }
         if (isSingle) {
             initClient();
         } else {
@@ -327,6 +334,19 @@ public class ConversationActivity extends BaseActivity {
 
     private class ConversationAdapter extends BaseAdapter {
 
+        /**
+         * 收到的消息布局类型
+         */
+        private final int VIEW_TYPE_OTHER = 0;
+        /**
+         * 发送的消息布局类型
+         */
+        private final int VIEW_TYPE_MY = 1;
+        /**
+         * 布局类型的数量
+         */
+        private final int VIWE_TYPE_COUNT = 2;
+
         @Override
         public int getCount() {
             return msgRecordList.size();
@@ -343,51 +363,97 @@ public class ConversationActivity extends BaseActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder = null;
-            LogUtil.i("from==" + msgRecordList.get(position).getFrom() + msgRecordList.get(position).getContent());
-            //if (convertView == null) {
-                viewHolder = new ViewHolder();
-                if (msgRecordList.get(position).getFrom() != null
-                        && msgRecordList.get(position).getFrom().equals(CommonApplication.userInfo.nick_name)) {
-                    convertView = getLayoutInflater().from(ConversationActivity.this).inflate(R.layout.item_conversation_right_layout, parent, false);
-                } else {
-                    convertView = getLayoutInflater().from(ConversationActivity.this).inflate(R.layout.item_conversation_left_layout, parent, false);
-                }
-                viewHolder.contentText = (TextView)convertView.findViewById(R.id.content_text);
-                viewHolder.icon = (ImageView) convertView.findViewById(R.id.user_icon);
-                convertView.setTag(viewHolder);
-//            } else {
-//                viewHolder = (ViewHolder)convertView.getTag();
-//            }
+        public int getViewTypeCount() {
+            return VIWE_TYPE_COUNT;
+        }
 
-            viewHolder.contentText.setText(msgRecordList.get(position).getContent());
-            CommonApplication.setTypeface(viewHolder.contentText);
-            if (msgRecordList.get(position).getFrom() != null && msgRecordList.get(position).getFrom().equals(CommonApplication.userInfo.id)) {
-                if (!TextUtils.isEmpty(CommonApplication.userInfo.icon)) {
-                    Glide.with(ConversationActivity.this)
-                            .load(CommonApplication.userInfo.icon)
-                            .placeholder(R.drawable.default_icon)
-                            .error(R.drawable.default_icon)
-                            .into(viewHolder.icon);
+        @Override
+        public int getItemViewType(int position) {
+            if (msgRecordList.get(position).getFrom() != null
+                    && msgRecordList.get(position).getFrom().equals(CommonApplication.userInfo.nick_name)) {
+                return VIEW_TYPE_MY;
+            }
+
+            return VIEW_TYPE_OTHER;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            OtherViewHolder otherHolder = null;
+            MyViewHolder myHolder = null;
+            int type = getItemViewType(position);
+            if (convertView == null) {
+                otherHolder = new OtherViewHolder();
+                myHolder = new MyViewHolder();
+                switch (type) {
+                    case VIEW_TYPE_OTHER:
+                        convertView = getLayoutInflater().from(ConversationActivity.this).inflate(R.layout.item_conversation_left_layout, parent, false);
+                        otherHolder.icon = (SimpleDraweeView) convertView.findViewById(R.id.user_icon);
+                        otherHolder.contentText = (TextView)convertView.findViewById(R.id.content_text);
+                        convertView.setTag(otherHolder);
+                        break;
+                    case VIEW_TYPE_MY:
+                        convertView = getLayoutInflater().from(ConversationActivity.this).inflate(R.layout.item_conversation_right_layout, parent, false);
+                        myHolder.icon = (SimpleDraweeView) convertView.findViewById(R.id.user_icon);
+                        myHolder.contentText = (TextView)convertView.findViewById(R.id.content_text);
+                        convertView.setTag(myHolder);
+                        break;
+                    default:
+                        break;
                 }
             } else {
-                if (!TextUtils.isEmpty(userIcon)) {
-                    Glide.with(ConversationActivity.this)
-                            .load(userIcon)
-                            .placeholder(R.drawable.default_icon)
-                            .error(R.drawable.default_icon)
-                            .into(viewHolder.icon);
+                switch (type) {
+                    case VIEW_TYPE_OTHER:
+                        otherHolder = (OtherViewHolder) convertView.getTag();
+                        break;
+                    case VIEW_TYPE_MY:
+                        myHolder = (MyViewHolder) convertView.getTag();
+                        break;
+                    default:
+                        break;
                 }
+            }
+
+            if (type == VIEW_TYPE_OTHER) {
+                setItemValue(otherHolder, position);
+            } else {
+                setItemValue(myHolder, position);
             }
 
             return convertView;
         }
 
+        /**
+         * 设置子布局的内容
+         * @param viewHolder
+         * @param position
+         */
+        private void setItemValue(ViewHolder viewHolder, int position) {
+            viewHolder.contentText.setText(msgRecordList.get(position).getContent());
+            CommonApplication.setTypeface(viewHolder.contentText);
+            if (msgRecordList.get(position).getFrom() != null && msgRecordList.get(position).getFrom().equals(CommonApplication.userInfo.id)) {
+                if (!TextUtils.isEmpty(CommonApplication.userInfo.icon)) {
+                    viewHolder.icon.setImageURI(Uri.parse(CommonApplication.userInfo.icon));
+                }
+            } else {
+                if (!TextUtils.isEmpty(userIcon)) {
+                    viewHolder.icon.setImageURI(Uri.parse(userIcon));
+                }
+            }
+        }
+
         private class ViewHolder {
-            public ImageView icon;
+            public SimpleDraweeView icon;
             public TextView contentText;
-            private TextView timeText;
+            public TextView timeText;
+        }
+
+        private class OtherViewHolder extends ViewHolder {
+
+        }
+
+        private class MyViewHolder extends ViewHolder  {
+
         }
     }
 }

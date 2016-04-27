@@ -76,7 +76,11 @@ public class NearByContactActivity extends BaseProgressActivity {
             @Override
             public void onError(int errCode, String errMsg) {
                 LogUtil.i("error:" + errMsg);
-                notifyLoadFinish(MSG_LOAD_FAILURE);
+                if (errCode == 0) {
+                    notifyLoadFinish(MSG_LOAD_EMPTY);
+                } else {
+                    notifyLoadFinish(MSG_LOAD_FAILURE);
+                }
             }
         });
 

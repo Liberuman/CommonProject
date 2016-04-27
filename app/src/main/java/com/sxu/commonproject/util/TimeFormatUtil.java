@@ -2,6 +2,7 @@ package com.sxu.commonproject.util;
 
 import android.text.TextUtils;
 
+import java.security.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,11 +34,11 @@ public class TimeFormatUtil {
     /**
      * 讲时间戳进行格式化，具体规则如下：
      * 今天：hh:mm; 昨天：昨天; 一周内：星期; 今年：MM月dd日; 其他：yyyy-MM-dd
-     * @param milliSecond
+     * @param second
      * @return
      */
-    public static String getTimeDesc(long milliSecond) {
-        Date oldTime = new Date(milliSecond);
+    public static String getTimeDesc(long second) {
+        Date oldTime = new Date(second * 1000);
         Date currentTime = new Date();
         SimpleDateFormat sdf = null;
         String dateDesc = "";

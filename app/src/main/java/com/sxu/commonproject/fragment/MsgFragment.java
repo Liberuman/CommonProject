@@ -1,6 +1,7 @@
 package com.sxu.commonproject.fragment;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,17 +9,21 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMConversationQuery;
 import com.avos.avoscloud.im.v2.AVIMException;
+import com.avos.avoscloud.im.v2.AVIMMessage;
 import com.avos.avoscloud.im.v2.callback.AVIMClientCallback;
 import com.avos.avoscloud.im.v2.callback.AVIMConversationQueryCallback;
+import com.avos.avoscloud.im.v2.callback.AVIMSingleMessageQueryCallback;
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.activity.ConversationActivity;
 import com.sxu.commonproject.activity.LoginActivity;
 import com.sxu.commonproject.activity.NearByContactActivity;
 import com.sxu.commonproject.app.CommonApplication;
+import com.sxu.commonproject.baseclass.ACache;
 import com.sxu.commonproject.baseclass.BaseCommonAdapter;
 import com.sxu.commonproject.baseclass.BaseViewHolder;
 import com.sxu.commonproject.bean.ContactBean;
@@ -62,9 +67,7 @@ public class MsgFragment extends BaseFragment {
 
     @Override
     public void initFragment() {
-        if (contactData.size() == 0) {
-            tipsText.setVisibility(View.VISIBLE);
-        }
+        getLatestContact();
         setContactAdapter();
         EventBus.getDefault().register(this);
 
@@ -91,40 +94,77 @@ public class MsgFragment extends BaseFragment {
     }
 
     private void getLatestContact() {
-        AVIMClient tom = AVIMClient.getInstance("Tom");
-        tom.open(new AVIMClientCallback(){
+        if (CommonApplication.client == null && !TextUtils.isEmpty(CommonApplication.userInfo.nick_name)) {
+            CommonApplication.client = AVIMClient.getInstance(CommonApplication.userInfo.nick_name);
+        }
 
-            @Override
-            public void done(AVIMClient client,AVIMException e){
-                if(e==null){
-                    //登录成功
-                    AVIMConversationQuery query = client.getQuery();
-                    query.findInBackground(new AVIMConversationQueryCallback(){
-                        @Override
-                        public void done(List<AVIMConversation> convs, AVIMException e){
-                            if(e==null){
-                                //convs就是获取到的conversation列表
-                                //注意：按每个对话的最后更新日期（收到最后一条消息的时间）倒序排列
+        if (CommonApplication.client != null) {
+            CommonApplication.client.open(new AVIMClientCallback() {
+                @Override
+                public void done(AVIMClient client, AVIMException e) {
+                    if (e == null) {
+                        //登录成功
+                        AVIMConversationQuery query = client.getQuery();
+                        query.setQueryPolicy(AVQuery.CachePolicy.NETWORK_ELSE_CACHE);
+                        query.findInBackground(new AVIMConversationQueryCallback() {
+                            @Override
+                            public void done(final List<AVIMConversation> conversationList, AVIMException e) {
+                                if (e == null && conversationList != null) {
+                                    LogUtil.i("size===记录==" + conversationList.size());
+                                    for (int i = 0; i < conversationList.size(); i++) {
+                                        final int index = i;
+                                        conversationList.get(i).getLastMessage(new AVIMSingleMessageQueryCallback() {
+                                            @Override
+                                            public void done(AVIMMessage avimMessage, AVIMException e) {
+                                                if (e == null) {
+                                                    ContactBean itemContact = new ContactBean();
+                                                    itemContact.nick_name = conversationList.get(index).getName();
+                                                    // 获取缓存的用户头像
+                                                    ACache cache = ACache.get(CommonApplication.getInstance());
+                                                    itemContact.icon = cache.getAsString(itemContact.nick_name);
+                                                    itemContact.content = avimMessage.getContent();
+                                                    itemContact.time = TimeFormatUtil.getTimeDesc(
+                                                            conversationList.get(index).getUpdatedAt().getTime() / 1000);
+                                                    contactData.add(itemContact);
+                                                    LogUtil.i("nickName=" + itemContact.nick_name + " time==" + conversationList.get(index).getUpdatedAt().getTime());
+                                                    setContactAdapter();
+                                                } else {
+                                                    e.printStackTrace(System.out);
+                                                    setContactAdapter();
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     private void setContactAdapter() {
-        contactAdapter = new BaseCommonAdapter<ContactBean>(getActivity(), contactData, R.layout.item_msg_layout) {
-            @Override
-            public void convert(BaseViewHolder viewHolder, ContactBean data) {
-                //((ImageView)viewHolder.getView(R.id.icon)).setImageResource(data.icon);
-                viewHolder.setText(R.id.nickname_text, data.nick_name);
-                viewHolder.setText(R.id.msg_content_text, data.content);
-                viewHolder.setText(R.id.time_text, TimeFormatUtil.getTimeDesc(TimeFormatUtil.strTimeToLong(data.time)));
-            }
-        };
+        if (contactData.size() > 0) {
+            tipsText.setVisibility(View.GONE);
+        } else {
+            tipsText.setVisibility(View.VISIBLE);
+        }
 
-        contactList.setAdapter(contactAdapter);
+        if (contactAdapter == null) {
+            contactAdapter = new BaseCommonAdapter<ContactBean>(getActivity(), contactData, R.layout.item_msg_layout) {
+                @Override
+                public void convert(BaseViewHolder viewHolder, ContactBean data) {
+                    viewHolder.setImageResource(R.id.icon, R.drawable.default_icon, null, data.icon);
+                    viewHolder.setText(R.id.nickname_text, data.nick_name);
+                    viewHolder.setText(R.id.msg_content_text, data.content);
+                    viewHolder.setText(R.id.time_text, TimeFormatUtil.getTimeDesc(TimeFormatUtil.strTimeToLong(data.time)));
+                }
+            };
+            contactList.setAdapter(contactAdapter);
+        } else {
+            contactAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

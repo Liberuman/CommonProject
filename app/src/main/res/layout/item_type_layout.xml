@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/type_icon"
         android:layout_width="55dp"
-        android:layout_height="55dp" />
+        android:layout_height="55dp"
+        app:roundAsCircle="true"
+        app:placeholderImage="@drawable/ic_launcher"/>
     <TextView
         android:id="@+id/type_desc_text"
         android:layout_width="wrap_content"

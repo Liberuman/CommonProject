@@ -18,13 +18,13 @@ public class ServerConfig {
     // 获取指定类型的活动列表
     public static String SPECIFIC_TYPE_ACTIVITIES = "ActivityController/get_specific_type_activities?type=%s";
     // 获取已发布的活动列表
-    public static String LAUNCHED_ACTIVITIES = "ActivityController/get_launched_activities?user_id=%s";
+    public static String LAUNCHED_ACTIVITIES = "ActivityController/get_launched_activities?user_id=%s&page=%s";
     // 获取指定的活动信息
     public static String SPECIFIC_ACTIVITY = "ActivityController/get_specific_activity?id=%s";
     // 添加新的活动
     public static String ADD_ACTIVITY = "ActivityController/add_activity";
     // 删除指定活动
-    public static String DEL_ACTIVITY = "ActivityController/del_activity";
+    public static String DEL_ACTIVITY = "ActivityController/del_activity?id=%s";
     // 更新活动信息
     public static String UPDATE_ACTIVITY = "ActivityController/update_activity";
     // 获取所有的活动类型
@@ -59,8 +59,8 @@ public class ServerConfig {
     public static String CHECK_VERSION = "VersionController/update_version";
 
     public static String getServerAddress() {
-        //return "http://192.168.1.56:8080/";
-        return "http://139.196.153.190/";
+        return "http://192.168.1.56:8080/";
+        //return "http://139.196.153.190/";
     }
 
     public static String urlWithSuffix(String suffix) {

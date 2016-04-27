@@ -8,26 +8,22 @@ import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.amap.api.location.AMapLocation;
-//import com.avos.avoscloud.AVOSCloud;
-//import com.avos.avoscloud.im.v2.AVIMClient;
-//import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.im.v2.AVIMClient;
 import com.avos.avoscloud.im.v2.AVIMConversation;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.umeng.socialize.PlatformConfig;
-import com.sxu.commonproject.manager.UserManager;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.sxu.commonproject.bean.UserBean;
+import com.sxu.commonproject.manager.UserManager;
 import com.sxu.commonproject.service.LocationService;
 import com.sxu.commonproject.service.ReceiverMsgService;
+import com.umeng.socialize.PlatformConfig;
 
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
+//import com.avos.avoscloud.AVOSCloud;
+//import com.avos.avoscloud.im.v2.AVIMClient;
+//import com.avos.avoscloud.im.v2.AVIMConversation;
 
 /**
  * Created by juhg on 16/2/17.
@@ -46,8 +42,8 @@ public class CommonApplication extends Application {
     public void onCreate() {
         super.onCreate();
         this.context = this;
-        initGlide();
         initUmengShare();
+        Fresco.initialize(this);
         AVOSCloud.initialize(this, "uUn9uI5ABWJrjTfaLB3bCffD-gzGzoHsz", "50bTpIIB5Vs0kjOUsOY9RmFm");
         AVOSCloud.setDebugLogEnabled(true);
 
@@ -62,12 +58,6 @@ public class CommonApplication extends Application {
 
     public static Context getInstance() {
         return context;
-    }
-    /**
-     * 更换Glide网络库
-     */
-    private void initGlide() {
-        Glide.get(this).register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(new OkHttpClient()));
     }
 
     public static void setTypeface(TextView textView) {

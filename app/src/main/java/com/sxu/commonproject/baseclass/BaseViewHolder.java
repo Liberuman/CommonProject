@@ -1,14 +1,15 @@
 package com.sxu.commonproject.baseclass;
 
 import android.content.Context;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.sxu.commonproject.app.CommonApplication;
 
 /**
@@ -63,14 +64,15 @@ public class BaseViewHolder {
     }
 
     public void setImageResource(int resId, int defaultImageId, ViewGroup.LayoutParams params, String url) {
-        ImageView imageView = getView(resId);
-        if (imageView != null && params != null) {
-            imageView.setLayoutParams(params);
+        SimpleDraweeView draweeView = getView(resId);
+        if (draweeView != null && params != null) {
+            draweeView.setLayoutParams(params);
         }
-        Glide.with(context)
-                .load(url)
-                .placeholder(defaultImageId)
-                .error(defaultImageId)
-                .into(imageView);
+
+        if (!TextUtils.isEmpty(url)) {
+            draweeView.setImageURI(Uri.parse(url));
+        } else {
+            draweeView.setImageResource(defaultImageId);
+        }
     }
 }

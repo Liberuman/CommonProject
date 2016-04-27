@@ -3,6 +3,7 @@ package com.sxu.commonproject.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -13,9 +14,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.BaseDataSubscriber;
+import com.facebook.datasource.DataSource;
+import com.facebook.datasource.DataSubscriber;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.image.CloseableBitmap;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.app.CommonApplication;
 import com.sxu.commonproject.bean.UserBean;
@@ -117,14 +126,7 @@ public class UserDetailInfoActivity extends BaseProgressActivity {
             telNumberText.setText(userInfo.tel_number);
             signEdit.setText(userInfo.signature);
             if (!TextUtils.isEmpty(userInfo.icon)) {
-                Glide.with(this).load(userInfo.icon).asBitmap().into(new SimpleTarget<Bitmap>(screenWidth, screenWidth*2/3) {
-                    @Override
-                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-                        icon.setImageBitmap(bitmap);
-                        originBitmap = bitmap;
-                        handler.sendEmptyMessage(1);
-                    }
-                });
+                loadIcon(Uri.parse(userInfo.icon));
             } else {
                 setBlurImageView(((BitmapDrawable)getResources().getDrawable(R.drawable.default_icon)).getBitmap(), 4);
             }
@@ -164,6 +166,42 @@ public class UserDetailInfoActivity extends BaseProgressActivity {
                 });
         LogUtil.i("请求数据" + getIntent().getStringExtra("userId"));
         userInfoQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.GET_USER_INFO, getIntent().getStringExtra("userId"))));
+    }
+
+    public void loadIcon(Uri uri) {
+        DataSubscriber dataSubscriber = new BaseDataSubscriber<CloseableReference<CloseableBitmap>>() {
+            @Override
+            public void onNewResultImpl(DataSource<CloseableReference<CloseableBitmap>> dataSource) {
+                if (dataSource.isFinished()) {
+                    CloseableReference<CloseableBitmap> imageReference = dataSource.getResult();
+                    if (imageReference != null) {
+                        final CloseableReference<CloseableBitmap> closeableReference = imageReference.clone();
+                        try {
+                            CloseableBitmap closeableBitmap = closeableReference.get();
+                            Bitmap bitmap = closeableBitmap.getUnderlyingBitmap();
+                            if (bitmap != null && !bitmap.isRecycled()) {
+                                originBitmap = bitmap;
+                                icon.setImageBitmap(bitmap);
+                                handler.sendEmptyMessage(1);
+                            }
+                        } finally {
+                            imageReference.close();
+                            closeableReference.close();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailureImpl(DataSource dataSource) {
+                LogUtil.e(dataSource.getFailureCause().getMessage());
+            }
+        };
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri).build();
+        DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline.fetchDecodedImage(request, this);
+        dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
     }
 
     private void setBlurImageView(Bitmap originBitmap, int scaleRatio) {

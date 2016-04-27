@@ -151,6 +151,7 @@ public abstract class BaseProgressActivity<T extends BaseBean> extends Activity 
         progressBar.setVisibility(View.GONE);
         switch (msg.what) {
             case MSG_LOAD_EMPTY:
+                navigationBar.setTitle("加载失败");
                 resultLayout.setVisibility(View.VISIBLE);
                 resultIcon.setImageResource(R.drawable.ic_launcher);
                 resultText.setText("没有搜索到结果");
@@ -167,6 +168,7 @@ public abstract class BaseProgressActivity<T extends BaseBean> extends Activity 
                 }
                 break;
             case MSG_LOAD_FAILURE:
+                navigationBar.setTitle("加载失败");
                 resultLayout.setVisibility(View.VISIBLE);
                 resultIcon.setImageResource(R.drawable.ic_launcher);
                 resultText.setText("您好像没有连接网络");

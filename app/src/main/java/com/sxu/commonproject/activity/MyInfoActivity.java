@@ -22,14 +22,24 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.BaseDataSubscriber;
+import com.facebook.datasource.DataSource;
+import com.facebook.datasource.DataSubscriber;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.image.CloseableBitmap;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
 import com.sxu.commonproject.R;
 import com.sxu.commonproject.app.CommonApplication;
+import com.sxu.commonproject.baseclass.ACache;
 import com.sxu.commonproject.baseclass.BaseCommonProtocolBean;
 import com.sxu.commonproject.bean.EventBusBean;
 import com.sxu.commonproject.bean.UserBean;
@@ -94,20 +104,13 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    Glide.with(MyInfoActivity.this)
-                            .load((String)msg.obj)
-                            .placeholder(R.drawable.ic_launcher)
-                            .error(R.drawable.ic_launcher)
-                            .into(icon);
-                    break;
-                case 2:
-                    ToastUtil.show(MyInfoActivity.this, "头像上传失败");
-                    break;
-                case 3:
                     if (originBitmap != null) {
                         LogUtil.i("调用高斯");
                         setBlurImageView(originBitmap, 4);
                     }
+                    break;
+                case 2:
+                    ToastUtil.show(MyInfoActivity.this, "头像上传失败");
                     break;
                 default:
                     break;
@@ -128,7 +131,7 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
         telNumberText = (TextView)findViewById(R.id.tel_text);
         logoutText = (TextView)findViewById(R.id.logout_text);
         signEdit = (EditText)findViewById(R.id.sign_text);
-        icon = (ImageView)findViewById(R.id.icon);
+        icon = (ImageView) findViewById(R.id.icon);
         iconBg = (ImageView)findViewById(R.id.icon_bg);
         chooseIcon = (ImageView)findViewById(R.id.choose_icon);
         iconLayout = (LinearLayout)findViewById(R.id.icon_layout);
@@ -162,22 +165,19 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
             } else {
                 genderText.setText("女");
             }
+            nicknameText.setText(userInfo.nick_name);
             telNumberText.setText(userInfo.tel_number);
             signEdit.setText(userInfo.signature);
             if (!TextUtils.isEmpty(userInfo.icon)) {
-                Glide.with(this).load(userInfo.icon).asBitmap().into(new SimpleTarget<Bitmap>(screenWidth, screenWidth * 2 / 3) {
-                    @Override
-                    public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-                        icon.setImageBitmap(bitmap);
-                        originBitmap = bitmap;
-                        handler.sendEmptyMessage(3);
-                    }
-                });
+                loadIcon(Uri.parse(userInfo.icon));
             } else {
                 setBlurImageView(((BitmapDrawable)getResources().getDrawable(R.drawable.default_icon)).getBitmap(), 4);
             }
         }
 
+        if (CommonApplication.location != null) {
+            locationText.setText(CommonApplication.location.getAddress());
+        }
         signEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -348,7 +348,7 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
         Map<String, String> params = new HashMap<String, String>();
         params.put("id", userInfo.id);
         params.put("gender", gender + "");
-        params.put("sign", signEdit.getText().toString());
+        params.put("signature", signEdit.getText().toString());
         updateQuery.doPostQuery(ServerConfig.urlWithSuffix(ServerConfig.UPDATE_USER_INFO), params);
     }
 
@@ -433,14 +433,7 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
                     public void onFinish(BaseCommonProtocolBean bean) {
                         if (bean.code == 1) {
                             ToastUtil.show(MyInfoActivity.this, "头像上传成功");
-                            Glide.with(MyInfoActivity.this).
-                                    load(bean.data).asBitmap().into(new SimpleTarget<Bitmap>(screenWidth, screenWidth * 2 / 3) {
-                                @Override
-                                public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-                                    originBitmap = bitmap;
-                                    handler.sendEmptyMessage(3);
-                                }
-                            });
+                            loadIcon(Uri.parse(bean.data));
                         } else {
                             ToastUtil.show(MyInfoActivity.this, "头像上传失败");
                         }
@@ -490,6 +483,43 @@ public class MyInfoActivity extends BaseActivity implements View.OnClickListener
         }
 
         return path;
+    }
+
+    public void loadIcon(Uri uri) {
+        DataSubscriber dataSubscriber = new BaseDataSubscriber<CloseableReference<CloseableBitmap>>() {
+            @Override
+            public void onNewResultImpl(DataSource<CloseableReference<CloseableBitmap>> dataSource) {
+                if (dataSource.isFinished()) {
+                    CloseableReference<CloseableBitmap> imageReference = dataSource.getResult();
+                    if (imageReference != null) {
+                        final CloseableReference<CloseableBitmap> closeableReference = imageReference.clone();
+                        try {
+                            CloseableBitmap closeableBitmap = closeableReference.get();
+                            Bitmap bitmap = closeableBitmap.getUnderlyingBitmap();
+                            if (bitmap != null && !bitmap.isRecycled()) {
+                                originBitmap = bitmap;
+                                icon.setImageBitmap(bitmap);
+                                handler.sendEmptyMessage(1);
+                            }
+                        } finally {
+                            imageReference.close();
+                            closeableReference.close();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailureImpl(DataSource dataSource) {
+                LogUtil.e(dataSource.getFailureCause().getMessage());
+                handler.sendEmptyMessage(2);
+            }
+        };
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri).build();
+        DataSource<CloseableReference<CloseableImage>> dataSource = imagePipeline.fetchDecodedImage(request, this);
+        dataSource.subscribe(dataSubscriber, CallerThreadExecutor.getInstance());
     }
 
     @Override

@@ -17,6 +17,7 @@ import com.sxu.commonproject.app.CommonApplication;
 import com.sxu.commonproject.baseclass.ACache;
 import com.sxu.commonproject.baseclass.BaseCommonAdapter;
 import com.sxu.commonproject.baseclass.BaseViewHolder;
+import com.sxu.commonproject.bean.ActivityBean;
 import com.sxu.commonproject.bean.ActivityTypeBean;
 import com.sxu.commonproject.manager.UserManager;
 import com.sxu.commonproject.bean.BaseProtocolBean;
@@ -50,8 +51,9 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
     private ImageView openIcon;
     private PopupWindow popupWindow;
 
-    private boolean isShowing = false;
-    private String typeId;
+    private boolean isUpdate = false;
+    private String typeId = "1";
+    private ActivityBean.ActivityItemBean activityInfo;
     private BaseHttpQuery<BaseProtocolBean> launchQuest;
     private ArrayList<ActivityTypeBean.ActivityTypeItemBean> activityTypeList;
 
@@ -84,11 +86,28 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
         navigationBar.showReturnIcon().setTitle("发布活动");
         activityTypeList = (ArrayList<ActivityTypeBean.ActivityTypeItemBean>)
                 ACache.get(CommonApplication.getInstance()).getAsObject("activityType");
+        activityInfo = (ActivityBean.ActivityItemBean)getIntent().getSerializableExtra("activityInfo");
+        if (activityInfo != null) {
+            isUpdate = true;
+            typeId = activityInfo.type + "";
+            if (activityTypeList != null && activityTypeList.size() > 0) {
+                typeText.setText(activityTypeList.get(activityInfo.type).type_name);
+            }
+            activityTitleEdit.setText(activityInfo.title);
+            destinationEdit.setText(activityInfo.destination);
+            timeEdit.setText(activityInfo.activity_time);
+            commentEdit.setText(activityInfo.comment);
+        }
 
         launchText.setOnClickListener(this);
         typeText.setOnClickListener(this);
 
-        navigationBar.getRightText("发布").setOnClickListener(new View.OnClickListener() {
+        if (isUpdate) {
+            navigationBar.getRightText("更新");
+        } else {
+            navigationBar.getRightText("发布");
+        }
+        navigationBar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 launchActivity();
@@ -101,7 +120,12 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
                 new BaseHttpQuery.OnQueryFinishListener<BaseProtocolBean>() {
             @Override
             public void onFinish(BaseProtocolBean bean) {
-                ToastUtil.show(LaunchActivityActivity.this, "活动发布成功");
+                if (isUpdate) {
+                    ToastUtil.show(LaunchActivityActivity.this, "活动已更新");
+                } else {
+                    ToastUtil.show(LaunchActivityActivity.this, "活动发布成功");
+                }
+
                 EventBus.getDefault().post(new EventBusBean.UpdateActivityBean(true));
                 MainActivity.enter(LaunchActivityActivity.this, 0);
                 finish();
@@ -119,10 +143,8 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
         params.put("user_name", UserManager.getInstance(this).getUserName());
         params.put("user_icon", CommonApplication.userInfo.icon);
         params.put("destination", destinationEdit.getText().toString());
-        params.put("distance", "1.5");
         params.put("type", typeId+"");
-        params.put("status", "1");
-        params.put("time", timeEdit.getText().toString());
+        params.put("activity_time", timeEdit.getText().toString());
         if (!TextUtils.isEmpty(CommonApplication.userInfo.icon)) {
             params.put("user_icon", CommonApplication.userInfo.icon);
         } else {
@@ -133,10 +155,23 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
         } else {
             params.put("comment", "");
         }
+
+        if (CommonApplication.location != null) {
+            params.put("longitude", CommonApplication.location.getLongitude() + "");
+            params.put("latitude", CommonApplication.location.getLatitude() + "");
+        }
+
+        if (isUpdate) {
+            params.put("id", activityInfo.id);
+        }
         LogUtil.i("param===" + params.toString());
         if (CommonApplication.isLogined) {
             if (isValidActivityInfo()) {
-                launchQuest.doPostQuery(ServerConfig.urlWithSuffix(ServerConfig.ADD_ACTIVITY), params);
+                if (isUpdate) {
+                    launchQuest.doPostQuery(ServerConfig.urlWithSuffix(ServerConfig.UPDATE_ACTIVITY), params);
+                } else {
+                    launchQuest.doPostQuery(ServerConfig.urlWithSuffix(ServerConfig.ADD_ACTIVITY), params);
+                }
             }
         } else {
             ToastUtil.show(this, "请登录后再发布活动");
@@ -180,7 +215,7 @@ public class LaunchActivityActivity extends BaseActivity implements View.OnClick
         InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(typeText.getWindowToken(), 0);
         ListView typeList = new ListView(this);
-        typeList.setBackgroundResource(R.drawable.activity_info_edit_bg);
+        typeList.setBackgroundResource(R.drawable.activity_type_list_bg);
         typeList.setOverScrollMode(View.OVER_SCROLL_NEVER);
         if (activityTypeList != null && activityTypeList.size() > 0) {
             typeList.setAdapter(new BaseCommonAdapter<ActivityTypeBean.ActivityTypeItemBean>(LaunchActivityActivity.this, activityTypeList,

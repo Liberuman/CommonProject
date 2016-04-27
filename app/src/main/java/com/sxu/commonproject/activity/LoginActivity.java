@@ -231,13 +231,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         if (!flag) {
                             MainActivity.enter(LoginActivity.this, 3);
                         }
-                        finish();
                     } else {
                         Intent intent = new Intent(LoginActivity.this, ResetPasswdActivity.class);
                         intent.putExtra("telNumber", telNumberEdit.getText().toString());
                         intent.putExtra("setPwdFlag", true);
                         startActivity(intent);
                     }
+                    finish();
                 } else {
                     ToastUtil.show(LoginActivity.this, bean.msg);
                 }

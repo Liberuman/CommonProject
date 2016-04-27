@@ -1,24 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:padding="15dp"
-    android:background="#FFFFFF">
-    <TextView
-        android:id="@+id/activity_title_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="明天去华夏公园打球明天去华夏公园打球明天去华夏公园打球明天去华夏公园打球"
-        android:textSize="15dp"
-        android:textColor="#333333"/>
-    <TextView
-        android:id="@+id/post_time_text"
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/horizontal_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:fillViewport="true"
+    android:scrollbars="none">
+    <LinearLayout
+        android:id="@+id/item_layout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginLeft="10dp"
-        android:text="2016-04-10"
-        android:textSize="12dp"
-        android:textColor="#666666"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+        <LinearLayout
+            android:id="@+id/content_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+            <TextView
+                android:id="@+id/activity_title_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#666666"/>
+            <TextView
+                android:id="@+id/post_time_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right|bottom"
+                android:textSize="13sp"
+                android:textColor="#666666"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/delete_text"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="删除"
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:background="#FF0000"/>
+    </LinearLayout>
+</HorizontalScrollView>

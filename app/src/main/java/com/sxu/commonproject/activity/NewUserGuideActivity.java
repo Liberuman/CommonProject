@@ -29,9 +29,10 @@ public class NewUserGuideActivity extends BaseActivity {
     private boolean mIsFirst, mIsJump;
     private View[] indicator = new View[3];
     private int[] guideImage = new int[]{
-            R.drawable.splash_bg,
-            R.drawable.splash_bg,
-            R.drawable.splash_bg,
+            R.drawable.splash5,
+            R.drawable.splash6,
+            R.drawable.splash7,
+            R.drawable.splash8
     };
 
     @Override
@@ -50,7 +51,7 @@ public class NewUserGuideActivity extends BaseActivity {
 
     @Override
     protected void initActivity() {
-        viewPager.setOffscreenPageLimit(5);
+        viewPager.setOffscreenPageLimit(4);
         entryIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

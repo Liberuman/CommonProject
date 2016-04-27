@@ -59,7 +59,9 @@ public class ReceiverMsgService extends Service {
 
     private void loginLeanCloud() {
         if (!TextUtils.isEmpty(UserManager.getInstance(this).getUserName())) {
-            CommonApplication.client = AVIMClient.getInstance(CommonApplication.userInfo.nick_name);
+            if (CommonApplication.client == null) {
+                CommonApplication.client = AVIMClient.getInstance(CommonApplication.userInfo.nick_name);
+            }
             LogUtil.i("客户端==" + CommonApplication.client.getClientId());
             CommonApplication.client.open(new AVIMClientCallback() {
                 @Override
@@ -79,7 +81,7 @@ public class ReceiverMsgService extends Service {
         @Override
         public void onMessage(AVIMMessage message, AVIMConversation conversation, AVIMClient client) {
             LogUtil.d("onMessage" + message.getContent() + conversation.getName());
-            showNotification(conversation.getName(), message.getContent());
+            showNotification(client.getClientId(), message.getContent());
             getUserInfo(client.getClientId(), message.getContent());
             EventBus.getDefault().post(new EventBusBean.UpdateConversation(message));
         }

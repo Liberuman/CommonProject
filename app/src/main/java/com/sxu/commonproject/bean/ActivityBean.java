@@ -19,10 +19,12 @@ public class ActivityBean extends BaseProtocolBean {
         public String user_name;
         public String destination;
         public String distance;
-        public String create_time;
-        public String type;
-        public String status;
-        public String number_of_person;
+        public long create_time;
+        public int type;
+        public String comment;
+        public String activity_time;
+        public float longitude;
+        public float latitude;
 
         @Override
         public int compareTo(ActivityItemBean another) {
@@ -34,13 +36,4 @@ public class ActivityBean extends BaseProtocolBean {
             return 1;
         }
     }
-
-
-
-//    public ActivityBean() {
-//        title = "周六去华夏公园打篮球";
-//        user_name = "Freeman";
-//        distance = "2公里";
-//        create_time = "2016－2-20";
-//    }
 }
