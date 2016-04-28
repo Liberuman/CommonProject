@@ -80,8 +80,8 @@ public class ReceiverMsgService extends Service {
         //接收到消息后的处理逻辑
         @Override
         public void onMessage(AVIMMessage message, AVIMConversation conversation, AVIMClient client) {
-            LogUtil.d("onMessage" + message.getContent() + conversation.getName());
-            showNotification(client.getClientId(), message.getContent());
+            LogUtil.d("onMessage" + message.getContent() + conversation.getName() + " clientId==" + client.getClientId() + " from==" + message.getFrom());
+            showNotification(message.getFrom(), message.getContent());
             getUserInfo(client.getClientId(), message.getContent());
             EventBus.getDefault().post(new EventBusBean.UpdateConversation(message));
         }

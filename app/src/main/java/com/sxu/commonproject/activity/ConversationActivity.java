@@ -53,7 +53,7 @@ public class ConversationActivity extends BaseActivity {
     private NavigationBar navigationBar;
 
     private boolean isSingle;
-    private String userId;
+    //private String userId;
     private String userIcon;
     private String userName;
     private List<AVIMMessage> msgRecordList = new ArrayList<AVIMMessage>();
@@ -99,11 +99,11 @@ public class ConversationActivity extends BaseActivity {
     @Override
     protected void initActivity() {
         isSingle = getIntent().getBooleanExtra("isSingle", false);
-        userId = getIntent().getStringExtra("userId");
+        //userId = getIntent().getStringExtra("userId");
         userIcon = getIntent().getStringExtra("userIcon");
         userName = getIntent().getStringExtra("userName");
 
-        LogUtil.i("isSingle==" + isSingle + " userId==" + userId + " userName==" + userName);
+        LogUtil.i("isSingle==" + isSingle + " userName==" + userName);
         pullToRefreshListView.setShowIndicator(false);
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         conversationList = pullToRefreshListView.getRefreshableView();
