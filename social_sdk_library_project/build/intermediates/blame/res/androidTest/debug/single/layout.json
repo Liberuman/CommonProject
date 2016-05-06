@@ -36,12 +36,12 @@
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/layout/messenger_button_send_white_large.xml"
     },
     {
-        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/layout/umeng_socialize_facebook_login_activity_layout.xml",
-        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/layout/umeng_socialize_facebook_login_activity_layout.xml"
-    },
-    {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/layout/umeng_bak_at_list.xml",
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/layout/umeng_bak_at_list.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/layout/umeng_socialize_facebook_login_activity_layout.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/layout/umeng_socialize_facebook_login_activity_layout.xml"
     },
     {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/layout/umeng_socialize_base_alert_dialog.xml",
@@ -76,12 +76,12 @@
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/layout/com_facebook_activity_layout.xml"
     },
     {
-        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/layout/messenger_button_send_white_round.xml",
-        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/layout/messenger_button_send_white_round.xml"
-    },
-    {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/layout/com_facebook_tooltip_bubble.xml",
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/layout/com_facebook_tooltip_bubble.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/layout/messenger_button_send_white_round.xml",
+        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/layout/messenger_button_send_white_round.xml"
     },
     {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/layout/messenger_button_send_blue_small.xml",

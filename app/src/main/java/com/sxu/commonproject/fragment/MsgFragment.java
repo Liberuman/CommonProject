@@ -123,8 +123,7 @@ public class MsgFragment extends BaseFragment {
                                                     ACache cache = ACache.get(CommonApplication.getInstance());
                                                     itemContact.icon = cache.getAsString(itemContact.nick_name);
                                                     itemContact.content = avimMessage.getContent();
-                                                    itemContact.time = TimeFormatUtil.getTimeDesc(
-                                                            conversationList.get(index).getUpdatedAt().getTime() / 1000);
+                                                    itemContact.time = conversationList.get(index).getUpdatedAt().getTime() + "";
                                                     contactData.add(itemContact);
                                                     LogUtil.i("nickName=" + itemContact.nick_name + " time==" + conversationList.get(index).getUpdatedAt().getTime());
                                                     setContactAdapter();

@@ -40,11 +40,11 @@ android {
     buildTypes {
         debug {
             // 是否进行混淆
-            minifyEnabled true
+            //minifyEnabled true
             // 混淆使用的文件
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             // 移除无用的resource文件
-            shrinkResources true
+            //shrinkResources true
             // 显示log
             buildConfigField "boolean", "LOG_DEBUG", "true"
         }

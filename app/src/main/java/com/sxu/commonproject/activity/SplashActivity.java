@@ -6,10 +6,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.sxu.commonproject.bean.EventBusBean;
 import com.sxu.commonproject.manager.VersionUpdateManager;
+import com.sxu.commonproject.service.LocationService;
+import com.sxu.commonproject.util.LogUtil;
 import com.sxu.commonproject.util.SharePreferenceTag;
 import com.sxu.commonproject.util.TimeFormatUtil;
 import com.sxu.commonproject.view.PreferenceUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /*******************************************************************************
  * FileName: SplashActivity
@@ -28,7 +35,7 @@ public class SplashActivity extends Activity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            checkEntryUserGuideOrMain();
+            startActivity(new Intent(SplashActivity.this, MainActivity.class));
             finish();
         }
     };
@@ -36,20 +43,21 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startService(new Intent(this, LocationService.class));
         // 检查版本更新
         VersionUpdateManager updateManager = new VersionUpdateManager(this);
         updateManager.checkVersion();
         handler.sendEmptyMessageDelayed(1, 2000);
     }
 
-    private void checkEntryUserGuideOrMain() {
-        if (PreferenceUtil.getBoolean(SharePreferenceTag.IS_NEW_USER, true)) {
-            PreferenceUtil.putBoolean(SharePreferenceTag.IS_NEW_USER, false);
-            startActivity(new Intent(this, NewUserGuideActivity.class));
-        } else {
-            startActivity(new Intent(this, MainActivity.class));
-        }
-
-        finish();
-    }
+//    private void checkEntryUserGuideOrMain() {
+//        if (PreferenceUtil.getBoolean(SharePreferenceTag.IS_NEW_USER, true)) {
+//            PreferenceUtil.putBoolean(SharePreferenceTag.IS_NEW_USER, false);
+//            startActivity(new Intent(this, NewUserGuideActivity.class));
+//        } else {
+//            startActivity(new Intent(this, MainActivity.class));
+//        }
+//
+//        finish();
+//    }
 }

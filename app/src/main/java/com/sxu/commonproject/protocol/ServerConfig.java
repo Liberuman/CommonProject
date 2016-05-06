@@ -15,6 +15,8 @@ public class ServerConfig {
 
     // 获取最新的活动列表
     public static String LATEST_ACTIVITIES = "ActivityController/get_latest_activities?page=%s";
+    // 获取附近的活动信息
+    public static String NEARBY_ACTIVITIES = "ActivityController/get_nearby_activities?page=%s&lng=%s&lat=%s";
     // 获取指定类型的活动列表
     public static String SPECIFIC_TYPE_ACTIVITIES = "ActivityController/get_specific_type_activities?type=%s";
     // 获取已发布的活动列表
@@ -54,13 +56,14 @@ public class ServerConfig {
     // 更新用户信息
     public static String UPDATE_USER_INFO = "UserController/update_user_info";
     // 获取附近的人
-    public static String GET_NEARBY_USERS = "UserController/get_nearby_users?lng=%s&lat=%s";
+    public static String GET_NEARBY_USERS = "UserController/get_nearby_users?page=%s&lng=%s&lat=%s";
     // 检查版本更新
     public static String CHECK_VERSION = "VersionController/update_version";
 
     public static String getServerAddress() {
-        return "http://192.168.1.56:8080/";
-        //return "http://139.196.153.190/";
+        //return "http://192.168.1.56:8080/";
+        return "http://webapp.jueloo.com/";
+        //return "http://120.26.238.68/";
     }
 
     public static String urlWithSuffix(String suffix) {

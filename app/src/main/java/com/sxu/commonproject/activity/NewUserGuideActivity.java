@@ -29,10 +29,10 @@ public class NewUserGuideActivity extends BaseActivity {
     private boolean mIsFirst, mIsJump;
     private View[] indicator = new View[3];
     private int[] guideImage = new int[]{
-            R.drawable.splash5,
-            R.drawable.splash6,
-            R.drawable.splash7,
-            R.drawable.splash8
+            R.drawable.splash_bg,
+            R.drawable.splash_bg,
+            R.drawable.splash_bg,
+            R.drawable.splash_bg
     };
 
     @Override

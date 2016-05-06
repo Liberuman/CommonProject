@@ -188,12 +188,12 @@
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_foursquare.png"
     },
     {
-        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_button_red.9.png",
-        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_button_red.9.png"
-    },
-    {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_location_on.png",
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_location_on.png"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_button_red.9.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_button_red.9.png"
     },
     {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_wxcircle_gray.png",
@@ -328,12 +328,12 @@
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_ynote_gray.png"
     },
     {
-        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_at_normal.png",
-        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_at_normal.png"
-    },
-    {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_share_to_button.xml",
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_share_to_button.xml"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_at_normal.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_at_normal.png"
     },
     {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_shape_solid_grey.xml",
@@ -468,12 +468,12 @@
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_shape_solid_black.xml"
     },
     {
-        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_evernote_gray.png",
-        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_evernote_gray.png"
-    },
-    {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_fetch_image.png",
         "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_fetch_image.png"
+    },
+    {
+        "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_evernote_gray.png",
+        "source": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/bundles/debug/res/drawable/umeng_socialize_evernote_gray.png"
     },
     {
         "merged": "/Users/juhg/Downloads/CommonProject-master/social_sdk_library_project/build/intermediates/res/merged/androidTest/debug/drawable/umeng_socialize_title_back_bt.xml",

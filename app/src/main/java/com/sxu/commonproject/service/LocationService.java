@@ -9,7 +9,10 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.sxu.commonproject.app.CommonApplication;
+import com.sxu.commonproject.bean.EventBusBean;
 import com.sxu.commonproject.util.LogUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,7 +63,7 @@ public class LocationService extends Service {
         //设置是否允许模拟位置,默认为false，不允许模拟位置
         mLocationOption.setMockEnable(false);
         //设置定位间隔,单位毫秒,默认为2000ms
-        mLocationOption.setInterval(2000);
+        mLocationOption.setInterval(5000);
         //给定位客户端对象设置定位参数
         mLocationClient.setLocationOption(mLocationOption);
     }

@@ -85,7 +85,7 @@ public class NearByContactActivity extends BaseProgressActivity {
         });
 
         if (CommonApplication.location != null) {
-            nearbyQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.GET_NEARBY_USERS,
+            nearbyQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.GET_NEARBY_USERS, currentPage,
                     CommonApplication.location.getLongitude(), CommonApplication.location.getLatitude())));
         } else {
             ToastUtil.show(this, "位置获取失败");

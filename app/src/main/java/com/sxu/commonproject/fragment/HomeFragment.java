@@ -23,6 +23,7 @@ import com.sxu.commonproject.protocol.ServerConfig;
 import com.sxu.commonproject.util.DistanceFormatUtil;
 import com.sxu.commonproject.util.LogUtil;
 import com.sxu.commonproject.util.TimeFormatUtil;
+import com.sxu.commonproject.util.ToastUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -141,7 +142,13 @@ public class HomeFragment extends BaseProgressFragment {
             }
         });
 
-        activityQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.LATEST_ACTIVITIES, currentPage)));
+        if (CommonApplication.location == null) {
+            //ToastUtil.show(getActivity(), "无法获取您的位置信息，请开启获取位置权限");
+            activityQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.LATEST_ACTIVITIES, currentPage)));
+        } else {
+            activityQuery.doGetQuery(ServerConfig.urlWithSuffix(String.format(ServerConfig.NEARBY_ACTIVITIES, currentPage,
+                    CommonApplication.location.getLongitude(), CommonApplication.location.getLatitude())));
+        }
     }
 
     @Override

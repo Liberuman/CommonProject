@@ -1,7 +1,7 @@
 <resources>
     <!-- 启动页的主题 -->
     <style name="SplashTheme" parent="android:Theme.Light.NoTitleBar">
-        <item name="android:windowBackground">@drawable/splash7</item>
+        <item name="android:windowBackground">@drawable/splash_bg</item>
         <item name="android:windowFullscreen">true</item>
     </style>
     <!-- TagGroup -->

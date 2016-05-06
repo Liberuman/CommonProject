@@ -29,6 +29,10 @@ public class EventBusBean {
 
     }
 
+    public static class LocationBean {
+
+    }
+
     public static class UpdateMsgList {
 
         public ContactBean contactInfo;
